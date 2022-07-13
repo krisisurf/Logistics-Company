@@ -22,6 +22,13 @@ public class ProductType {
     @JsonIgnoreProperties("productType")
     private Set<Product> products;
 
+    public ProductType(long id) {
+        this.id = id;
+    }
+
+    public ProductType() {
+    }
+
     public long getId() {
         return id;
     }
@@ -53,4 +60,6 @@ public class ProductType {
     public void setProducts(Set<Product> products) {
         this.products = products;
     }
+
+
 }
