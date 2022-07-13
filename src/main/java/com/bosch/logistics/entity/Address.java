@@ -44,6 +44,10 @@ public class Address {
     public Address() {
     }
 
+    public Address(long id) {
+        this.id = id;
+    }
+
     public long getId() {
         return id;
     }

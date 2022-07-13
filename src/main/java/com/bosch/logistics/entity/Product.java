@@ -10,7 +10,11 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    public Product(){
+    public Product(long id) {
+        this.id = id;
+    }
+
+    public Product() {
 
     }
 

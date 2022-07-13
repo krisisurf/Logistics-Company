@@ -31,6 +31,13 @@ public class DeliveryTime {
     @JsonIgnore//Properties("deliveryTime")
     private Set<Product> products;
 
+    public DeliveryTime(long id) {
+        this.id = id;
+    }
+
+    public DeliveryTime() {
+    }
+
     public long getId() {
         return id;
     }

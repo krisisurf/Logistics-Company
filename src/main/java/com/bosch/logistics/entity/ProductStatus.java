@@ -43,8 +43,12 @@ public class ProductStatus {
     public void setProducts(Set<Product> products) {
         this.products = products;
     }
+
+    public ProductStatus(long id) {
+        this.id = id;
+    }
+
+    public ProductStatus() {
+    }
 }
 
-enum Statuses{
-    OFFICEPROCCESING, TRANSIT, DELIVERED, RECIEVED
-}
