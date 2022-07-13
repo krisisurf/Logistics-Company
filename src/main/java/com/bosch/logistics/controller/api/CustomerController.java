@@ -40,4 +40,9 @@ public class CustomerController {
         customerService.delete(id);
     }
 
+    @GetMapping("/first-last-name-order-by-tel-asc")
+    @ResponseBody
+    public List<Customer> findAllByFirstNameStartsWithAndLastNameStartsWithAndOrderByTelAsc(@RequestParam String startFirstName, @RequestParam String startLastName){
+        return customerService.findAllByFirstNameStartsWithAndLastNameStartsWithOrderByTelAsc(startFirstName, startLastName);
+    }
 }
