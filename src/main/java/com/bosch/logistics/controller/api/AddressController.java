@@ -41,4 +41,15 @@ public class AddressController {
         service.deleteAddress(id);
     }
 
+//    @GetMapping("/city/{city}/code/{code}")
+//    List<Address> findAllAddressesByCityOrCode(@PathVariable String city, @PathVariable String code){
+//        return service.findAllAddressesByCityOrCode(city, code);
+//    }
+
+    @GetMapping("/city-or-code")
+    @ResponseBody
+    public List<Address> findAllAddressesByCityOrCode(@RequestParam(required = false) String city, @RequestParam(required = false) String code){
+        return service.findAllAddressesByCityOrCode(city, code);
+    }
+
 }
