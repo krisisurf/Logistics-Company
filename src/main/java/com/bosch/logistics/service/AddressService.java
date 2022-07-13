@@ -11,4 +11,5 @@ public interface AddressService {
     Address createAddress(Address address);
     Address updateAddress(Address address, long id);
     void deleteAddress(long id);
+    List<Address> findAllAddressesByCityOrCode(String city, String code);
 }

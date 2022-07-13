@@ -41,4 +41,9 @@ public class CustomerServiceImpl implements CustomerService {
     public void delete(long id) {
         customerRepository.deleteById(id);
     }
+
+    @Override
+    public List<Customer> findAllByFirstNameStartsWithAndLastNameStartsWithOrderByTelAsc(String startFirstName, String startLastName) {
+        return customerRepository.findAllByFirstNameStartsWithAndLastNameStartsWithOrderByTelAsc(startFirstName, startLastName);
+    }
 }
