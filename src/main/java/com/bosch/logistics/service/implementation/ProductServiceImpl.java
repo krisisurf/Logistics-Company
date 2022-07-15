@@ -1,11 +1,14 @@
 package com.bosch.logistics.service.implementation;
 
+import com.bosch.logistics.entity.Address;
 import com.bosch.logistics.entity.Product;
+import com.bosch.logistics.entity.ProductStatus;
 import com.bosch.logistics.repository.ProductRepository;
 import com.bosch.logistics.service.ProductService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -40,5 +43,26 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteProduct(long id) {
         repo.deleteById(id);
+    }
+
+    @Override
+    public Set<Product> findAllByProductStatus(long productStatusId) {
+        ProductStatus productStatus = new ProductStatus(productStatusId);
+        return repo.findAllByProductStatus(productStatus);
+    }
+
+    @Override
+    public Set<Product> findAllReceivedProducts() {
+        return repo.findAllByReceivedDateNotNull();
+    }
+
+    @Override
+    public int receivedProductsCount() {
+        return repo.countByReceivedDateNotNull();
+    }
+
+    @Override
+    public int countProductsOnAddress(Address address) {
+        return repo.countByReceiverAddress(address);
     }
 }
