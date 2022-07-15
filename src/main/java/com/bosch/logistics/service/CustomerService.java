@@ -12,4 +12,5 @@ public interface CustomerService {
     void delete(long id);
     List<Customer> findByFirstNameContainingAndTelEndingWith(String fname, String phone);
     List<Customer>  findByFirstNameStartingWithAndLastNameStartingWith(String fname, String lname);
+    Customer findByTel(String tel);
 }

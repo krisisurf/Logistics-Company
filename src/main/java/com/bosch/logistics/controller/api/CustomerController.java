@@ -1,10 +1,12 @@
 package com.bosch.logistics.controller.api;
 
 import com.bosch.logistics.entity.Customer;
+import com.bosch.logistics.entity.Product;
 import com.bosch.logistics.service.CustomerService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/customer")
@@ -48,5 +50,15 @@ public class CustomerController {
     @GetMapping("/FirstName/{fname}/LastName/{lname}")
     public List<Customer> findByFirstNameStartingWithAndLastNameStartingWith(@PathVariable("fname") String fname, @PathVariable("lname") String lname) {
         return this.customerService.findByFirstNameStartingWithAndLastNameStartingWith(fname,lname);
+    }
+
+    @GetMapping("/findByTel/{tel}")
+    public Customer findByTel(@PathVariable String tel) {
+        return customerService.findByTel(tel);
+    }
+    @GetMapping("/findProductByTel/{tel}")
+    public Set<Product> findProductByTel(@PathVariable String tel) {
+        Customer customer = customerService.findByTel(tel);
+        return customer.getProductsReceive();
     }
 }

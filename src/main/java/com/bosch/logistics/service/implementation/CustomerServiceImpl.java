@@ -51,4 +51,9 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> findByFirstNameStartingWithAndLastNameStartingWith(String fname, String lname) {
         return customerRepository.findByFirstNameStartingWithAndLastNameStartingWith(fname, lname);
     }
+
+    @Override
+    public Customer findByTel(String tel) {
+        return customerRepository.findByTel(tel);
+    }
 }
