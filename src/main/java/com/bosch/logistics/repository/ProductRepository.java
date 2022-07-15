@@ -1,17 +1,19 @@
 package com.bosch.logistics.repository;
 
-import com.bosch.logistics.entity.Address;
 import com.bosch.logistics.entity.Product;
-import com.bosch.logistics.entity.ProductStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Set;
-
+import java.time.LocalDate;
+import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    Set<Product> findAllByProductStatus(ProductStatus productStatus);
-    Set<Product> findAllByReceivedDateNotNull();
-    int countByReceivedDateNotNull();
+    List<Product> findAllByWeightBetween(String min, String max);
 
-    int countByReceiverAddress(Address address);
+    List<Product>findAllByReceivedDateBetween(LocalDate min, LocalDate max);
+
+    int countAllByReceivedDateBetween(LocalDate min, LocalDate max);
+
+    int countAllByReceivedDate(LocalDate date);
+
+    List<Product> findAllByReceivedDate(LocalDate date);
 }

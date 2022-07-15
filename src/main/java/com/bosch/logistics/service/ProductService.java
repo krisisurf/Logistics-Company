@@ -1,11 +1,9 @@
 package com.bosch.logistics.service;
 
-import com.bosch.logistics.entity.Address;
 import com.bosch.logistics.entity.Product;
-import com.bosch.logistics.entity.ProductStatus;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 public interface ProductService {
     List<Product> getProducts();
@@ -14,9 +12,16 @@ public interface ProductService {
     Product updateProduct(Product product, long id);
     void deleteProduct(long id);
 
-    Set<Product> findAllByProductStatus(long productStatusId);
-    Set<Product> findAllReceivedProducts();
-    int receivedProductsCount();
+    List<Product> findAllByWeightBetween(String min, String max);
 
-    int countProductsOnAddress(Address address);
+    List<Product>findAllByReceivedDateBetween(LocalDate min, LocalDate max);
+
+
+    int countAllByReceivedDateBetween(LocalDate min, LocalDate max);
+
+    int countAllByReceivedDate(LocalDate date);
+
+    List<Product> findAllByReceivedDate(LocalDate date);
+
 }
+

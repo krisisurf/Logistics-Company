@@ -43,8 +43,7 @@ public class Address {
 
     public Address() {
     }
-
-    public Address(long id) {
+    public Address(long id){
         this.id = id;
     }
 

@@ -31,13 +31,6 @@ public class Customer {
     @JsonIgnore//Properties("receiver")
     private Set<Product> productsReceive;
 
-    public Customer(long id) {
-        this.id = id;
-    }
-
-    public Customer() {
-    }
-
     @ManyToOne
     @JoinColumn(nullable = false)
     private Address address;

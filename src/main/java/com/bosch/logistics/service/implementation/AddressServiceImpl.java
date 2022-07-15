@@ -43,7 +43,14 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public List<Address> findAllAddressesByCityOrCode(String city, String code) {
-        return repo.findAllAddressesByCityOrCode(city, code);
+    public List<Address> findByCity(String city) {
+        return repo.findAllByCity(city);
     }
+
+    @Override
+    public List<Address> findByCode(String code) {
+        return repo.findAllByCode(code);
+    }
+
+
 }
