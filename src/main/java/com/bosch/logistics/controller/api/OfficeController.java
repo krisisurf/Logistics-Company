@@ -1,10 +1,12 @@
 package com.bosch.logistics.controller.api;
 
 import com.bosch.logistics.entity.Office;
+import com.bosch.logistics.entity.Product;
 import com.bosch.logistics.service.OfficeService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/office")
@@ -21,9 +23,9 @@ public class OfficeController {
         return this.officeService.getOffices();
     }
 
-    @GetMapping("/{id}")
-    public Office getOffice(@PathVariable("id") long id) {
-        return this.officeService.getOffice(id);
+    @GetMapping("/{officeId}")
+    public Office getOffice(@PathVariable long officeId) {
+        return this.officeService.getOffice(officeId);
     }
 
     @PostMapping
@@ -31,15 +33,23 @@ public class OfficeController {
         return officeService.create(office);
     }
 
-    @PutMapping("/{id}")
-    public Office update(@RequestBody Office office, @PathVariable long id) {
-        return officeService.update(office, id);
+    @PutMapping("/{officeId}")
+    public Office update(@RequestBody Office office, @PathVariable long officeId) {
+        return officeService.update(office, officeId);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id) {
-        officeService.delete(id);
+    @DeleteMapping("/{officeId}")
+    public void delete(@PathVariable long officeId) {
+        officeService.delete(officeId);
     }
 
+    @GetMapping("/{officeId}/products")
+    public Set<Product> getProductsInOffice(@PathVariable long officeId){
+        return officeService.productsInOffice(officeId);
+    }
 
+    @GetMapping("/products-count/{officeId}")
+    public int countProductsInOffice(@PathVariable long officeId){
+        return officeService.productsInOfficeCount(officeId);
+    }
 }
