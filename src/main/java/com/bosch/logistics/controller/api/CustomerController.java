@@ -40,4 +40,13 @@ public class CustomerController {
         customerService.delete(id);
     }
 
+    @GetMapping("/containingFirstName/{fname}/telephoneEndingWith/{phone}")
+    public List<Customer> findByFirstNameContainingAndTelEndingWith(@PathVariable("fname") String fname, @PathVariable("phone") String phone) {
+        return this.customerService.findByFirstNameContainingAndTelEndingWith(fname,phone);
+    }
+
+    @GetMapping("/FirstName/{fname}/LastName/{lname}")
+    public List<Customer> findByFirstNameStartingWithAndLastNameStartingWith(@PathVariable("fname") String fname, @PathVariable("lname") String lname) {
+        return this.customerService.findByFirstNameStartingWithAndLastNameStartingWith(fname,lname);
+    }
 }

@@ -2,6 +2,7 @@ package com.bosch.logistics.service;
 
 import com.bosch.logistics.entity.Product;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ProductService {
@@ -10,4 +11,17 @@ public interface ProductService {
     Product createProduct(Product product);
     Product updateProduct(Product product, long id);
     void deleteProduct(long id);
+
+    List<Product> findAllByWeightBetween(String min, String max);
+
+    List<Product>findAllByReceivedDateBetween(LocalDate min, LocalDate max);
+
+
+    int countAllByReceivedDateBetween(LocalDate min, LocalDate max);
+
+    int countAllByReceivedDate(LocalDate date);
+
+    List<Product> findAllByReceivedDate(LocalDate date);
+
 }
+

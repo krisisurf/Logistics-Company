@@ -41,4 +41,16 @@ public class AddressServiceImpl implements AddressService {
     public void deleteAddress(long id) {
         repo.deleteById(id);
     }
+
+    @Override
+    public List<Address> findByCity(String city) {
+        return repo.findAllByCity(city);
+    }
+
+    @Override
+    public List<Address> findByCode(String code) {
+        return repo.findAllByCode(code);
+    }
+
+
 }

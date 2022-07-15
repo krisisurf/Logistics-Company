@@ -41,4 +41,14 @@ public class CustomerServiceImpl implements CustomerService {
     public void delete(long id) {
         customerRepository.deleteById(id);
     }
+
+    @Override
+    public List<Customer> findByFirstNameContainingAndTelEndingWith(String fname, String phone) {
+        return customerRepository.findByFirstNameContainingAndTelEndingWith(fname, phone);
+    }
+
+    @Override
+    public List<Customer> findByFirstNameStartingWithAndLastNameStartingWith(String fname, String lname) {
+        return customerRepository.findByFirstNameStartingWithAndLastNameStartingWith(fname, lname);
+    }
 }
