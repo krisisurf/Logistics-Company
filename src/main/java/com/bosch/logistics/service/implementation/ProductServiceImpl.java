@@ -1,12 +1,15 @@
 package com.bosch.logistics.service.implementation;
 
+import com.bosch.logistics.entity.Address;
 import com.bosch.logistics.entity.Product;
+import com.bosch.logistics.entity.ProductStatus;
 import com.bosch.logistics.repository.ProductRepository;
 import com.bosch.logistics.service.ProductService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ProductServiceImpl implements ProductService {
