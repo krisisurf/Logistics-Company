@@ -42,6 +42,22 @@ public class OfficeServiceImpl implements OfficeService {
     public void delete(long id) {
         officeRepository.deleteById(id);
     }
+    
+    
+    @Override
+    public Set<Product> productsInOffice(long officeId) {
+        Office office = getOffice(officeId);
+        Address address = office.getAddress();
+        return address.getReceiverProducts();
+    }
+
+    @Override
+    public int productsInOfficeCount(long officeId) {
+        Office office = getOffice(officeId);
+        Address address = office.getAddress();
+
+        return productService.countProductsOnAddress(address);
+    }
 
 
 }
