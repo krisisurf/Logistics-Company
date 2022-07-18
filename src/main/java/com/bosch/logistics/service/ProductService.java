@@ -24,5 +24,8 @@ public interface ProductService {
     int countAllByReceivedDate(LocalDate date);
     List<Product> findAllByReceivedDate(LocalDate date);
     int countProductsOnAddress(Address address);
+
+    Set<Product> productsByCustomersCity(String city);
+    int countProductsByCustomersCity(String city);
 }
 

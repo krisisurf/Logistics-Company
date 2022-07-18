@@ -14,4 +14,6 @@ public interface OfficeService {
     int productsInOfficeCount(long officeId);
     Office update(Office office, long id);
     void delete(long id);
+
+    Set<Product> productsInOfficeNotReceived(long officeId);
 }

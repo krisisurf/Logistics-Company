@@ -83,5 +83,14 @@ public class ProductController {
         return productService.findAllByReceivedDate(LocalDate.parse(date));
     }
 
+    @GetMapping("/products-by-customers-city/{customerCity}")
+    public Set<Product> productsByCustomersCity(@PathVariable String customerCity){
+        return productService.productsByCustomersCity(customerCity);
+    }
+
+    @GetMapping("/count-products-by-customers-city/{customerCity}")
+    public int countProductsByCustomersCity(@PathVariable String customerCity){
+        return productService.countProductsByCustomersCity(customerCity);
+    }
 
 }

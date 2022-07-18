@@ -11,18 +11,19 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class OfficeServiceImpl implements OfficeService {
 
     private OfficeRepository officeRepository;
     private ProductService productService;
-    
+
     public OfficeServiceImpl(OfficeRepository officeRepository, ProductService productService) {
         this.officeRepository = officeRepository;
         this.productService = productService;
     }
-    
+
     @Override
     public List<Office> getOffices() {
         return officeRepository.findAll();
@@ -30,7 +31,7 @@ public class OfficeServiceImpl implements OfficeService {
 
     @Override
     public Office getOffice(long id) {
-        return officeRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid id: " + id));
+        return officeRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid id: " + id));
     }
 
     @Override
@@ -48,8 +49,7 @@ public class OfficeServiceImpl implements OfficeService {
     public void delete(long id) {
         officeRepository.deleteById(id);
     }
-    
-    
+
     @Override
     public Set<Product> productsInOffice(long officeId) {
         Office office = getOffice(officeId);
@@ -65,5 +65,8 @@ public class OfficeServiceImpl implements OfficeService {
         return productService.countProductsOnAddress(address);
     }
 
-
+    @Override
+    public Set<Product> productsInOfficeNotReceived(long officeId) {
+        return productsInOffice(officeId).stream().filter(p -> p.getReceivedDate() == null).collect(Collectors.toSet());
+    }
 }
