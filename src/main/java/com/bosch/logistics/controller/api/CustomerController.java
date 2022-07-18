@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/customer")
@@ -60,5 +61,13 @@ public class CustomerController {
     public Set<Product> findProductByTel(@PathVariable String tel) {
         Customer customer = customerService.findByTel(tel);
         return customer.getProductsReceive();
+    }
+
+    @GetMapping("/findProductByTel/{tel}/statusID/{id}")
+    public Set<Product> findProductByTelAndStatus(@PathVariable String tel, @PathVariable long id) {
+        Customer customer = customerService.findByTel(tel);
+        return customer.getProductsReceive().stream()
+                .filter(product -> product.getProductStatus().getId()==id)
+                .collect(Collectors.toSet());
     }
 }

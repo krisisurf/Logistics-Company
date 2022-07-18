@@ -1,11 +1,13 @@
 package com.bosch.logistics.controller.api;
 
+import com.bosch.logistics.entity.Customer;
 import com.bosch.logistics.entity.Product;
 import com.bosch.logistics.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/product")
@@ -66,4 +68,6 @@ public class ProductController {
     public List<Product> findAllByReceivedDate(@PathVariable("date") String date) {
         return service.findAllByReceivedDate(LocalDate.parse(date));
     }
+
+
 }
