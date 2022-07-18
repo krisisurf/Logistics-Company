@@ -49,6 +49,11 @@ public class ProductController {
         return productService.findAllByProductStatus(productStatusId);
         }
 
+    @GetMapping("/show-received")
+    public Set<Product> receivedProducts() {
+        return productService.findAllReceivedProducts();
+        }
+        
     @GetMapping("/findbetweenweight/{min}/{max}")
     public List<Product> findAllByWeightBetween(@PathVariable("min") String min, @PathVariable("max") String max) {
         return service.findAllByWeightBetween(min,max);
