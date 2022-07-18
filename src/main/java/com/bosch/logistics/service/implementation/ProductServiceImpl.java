@@ -50,6 +50,12 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> findAllByWeightBetween(String min, String max) {
         return repo.findAllByWeightBetween(min,max);
     }
+    
+    @Override
+    public Set<Product> findAllByProductStatus(long productStatusId) {
+        ProductStatus productStatus = new ProductStatus(productStatusId);
+        return repo.findAllByProductStatus(productStatus);
+    }
 
     @Override
     public List<Product> findAllByReceivedDateBetween(LocalDate min, LocalDate max) {
