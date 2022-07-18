@@ -1,8 +1,10 @@
 package com.bosch.logistics.service;
 
 import com.bosch.logistics.entity.Office;
+import com.bosch.logistics.entity.Product;
 
 import java.util.List;
+import java.util.Set;
 
 public interface OfficeService {
     List<Office> getOffices();

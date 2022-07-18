@@ -2,7 +2,6 @@ package com.bosch.logistics.service;
 
 import com.bosch.logistics.entity.Address;
 import com.bosch.logistics.entity.Product;
-import com.bosch.logistics.entity.ProductStatus;
 
 import java.time.LocalDate;
 import java.util.List;
