@@ -43,4 +43,14 @@ public class OfficeController {
         officeService.delete(officeId);
     }
 
+   @GetMapping("/{officeId}/products")
+    public Set<Product> getProductsInOffice(@PathVariable long officeId){
+        return officeService.productsInOffice(officeId);
+    }
+
+    @GetMapping("/products-count/{officeId}")
+    public int countProductsInOffice(@PathVariable long officeId){
+        return officeService.productsInOfficeCount(officeId);
+    }
+
 }
