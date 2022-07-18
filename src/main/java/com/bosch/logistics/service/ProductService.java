@@ -24,6 +24,6 @@ public interface ProductService {
     int countAllByReceivedDateBetween(LocalDate min, LocalDate max);
     int countAllByReceivedDate(LocalDate date);
     List<Product> findAllByReceivedDate(LocalDate date);
-
+    int countProductsOnAddress(Address address);
 }
 
