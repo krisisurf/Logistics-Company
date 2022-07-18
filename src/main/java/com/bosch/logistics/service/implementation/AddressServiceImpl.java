@@ -52,6 +52,12 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
+    public int countByCity(String city) {
+        return repo.countByCity(city);
+    }
+
+
+    @Override
     public List<Address> findByCode(String code) {
         return repo.findAllByCode(code);
     }

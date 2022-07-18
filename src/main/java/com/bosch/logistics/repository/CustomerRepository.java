@@ -1,9 +1,11 @@
 package com.bosch.logistics.repository;
 
+import com.bosch.logistics.entity.Address;
 import com.bosch.logistics.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Set;
 
 public interface CustomerRepository extends JpaRepository <Customer, Long>{
 

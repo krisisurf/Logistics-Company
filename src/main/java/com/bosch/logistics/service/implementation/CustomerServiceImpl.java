@@ -1,29 +1,35 @@
 package com.bosch.logistics.service.implementation;
 
+import com.bosch.logistics.entity.Address;
+import com.bosch.logistics.service.AddressService;
 import com.bosch.logistics.service.CustomerService;
 import com.bosch.logistics.entity.Customer;
 import com.bosch.logistics.repository.CustomerRepository;
 import com.bosch.logistics.service.CustomerService;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepository;
+    private AddressService addressService;
 
-    public CustomerServiceImpl(CustomerRepository customerRepository) {
+    public CustomerServiceImpl(CustomerRepository customerRepository, AddressService addressService) {
         this.customerRepository = customerRepository;
+        this.addressService = addressService;
     }
 
     @Override
-    public List<Customer> getCustomers(){
+    public List<Customer> getCustomers() {
         return customerRepository.findAll();
     }
 
     @Override
     public Customer getCustomer(long id) {
-        return customerRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid id: " + id));
+        return customerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid id: " + id));
     }
 
     @Override
@@ -46,7 +52,7 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> findAllByFirstNameStartsWithAndLastNameStartsWithOrderByTelAsc(String startFirstName, String startLastName) {
         return customerRepository.findAllByFirstNameStartsWithAndLastNameStartsWithOrderByTelAsc(startFirstName, startLastName);
     }
-    
+
     @Override
     public List<Customer> findByFirstNameContainingAndTelEndingWith(String fname, String phone) {
         return customerRepository.findByFirstNameContainingAndTelEndingWith(fname, phone);
@@ -61,5 +67,23 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer findByTel(String tel) {
         return customerRepository.findByTel(tel);
+    }
+
+    @Override
+    public Set<Customer> findByCity(String city) {
+        List<Address> addresses = addressService.findByCity(city);
+        Set<Customer> customers = new HashSet<>();
+        addresses.forEach(a -> customers.addAll(a.getCustomers()));
+
+        return customers;
+    }
+
+
+    @Override
+    public int countByCity(String city) {
+        // TODO 100: Needs rework, because this method is slow
+        List<Address> addresses = addressService.findByCity(city);
+        int count = addresses.stream().mapToInt(a -> a.getCustomers().size()).sum();
+        return count;
     }
 }
