@@ -58,6 +58,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public int receivedProductsCount() {
+        return repo.countByReceivedDateNotNull();
+    }
+    
+    @Override
     public Set<Product> findAllReceivedProducts() {
         return repo.findAllByReceivedDateNotNull();
     }
