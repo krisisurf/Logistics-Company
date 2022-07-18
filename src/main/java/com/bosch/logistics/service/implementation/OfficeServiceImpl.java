@@ -3,27 +3,26 @@ package com.bosch.logistics.service.implementation;
 
 import com.bosch.logistics.entity.Address;
 import com.bosch.logistics.entity.Office;
+import com.bosch.logistics.entity.Product;
 import com.bosch.logistics.repository.OfficeRepository;
 import com.bosch.logistics.service.OfficeService;
 import com.bosch.logistics.service.ProductService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class OfficeServiceImpl implements OfficeService {
 
     private OfficeRepository officeRepository;
-
-    public OfficeServiceImpl(OfficeRepository officeRepository) {
-        this.officeRepository = officeRepository;
-    }
+    private ProductService productService;
     
-      public OfficeServiceImpl(OfficeRepository officeRepository, ProductService productService) {
+    public OfficeServiceImpl(OfficeRepository officeRepository, ProductService productService) {
         this.officeRepository = officeRepository;
         this.productService = productService;
     }
-
+    
     @Override
     public List<Office> getOffices() {
         return officeRepository.findAll();
