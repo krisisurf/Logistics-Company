@@ -86,7 +86,12 @@ public class ProductServiceImpl implements ProductService {
     public int countAllByReceivedDate(LocalDate date) {
         return repo.countAllByReceivedDate(date);
     }
-
+    
+    @Override
+    public int countProductsOnAddress(Address address) {
+        return repo.countByReceiverAddress(address);
+    }
+    
     @Override
     public List<Product> findAllByReceivedDate(LocalDate date) {
         return repo.findAllByReceivedDate(date);
