@@ -73,6 +73,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public int receivedProductsCount() {
+        return repo.countByReceivedDateNotNull();
+    }
+    
+    @Override
     public int countAllByReceivedDateBetween(LocalDate min, LocalDate max) {
         return repo.countAllByReceivedDateBetween(min,max);
     }
