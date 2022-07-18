@@ -19,7 +19,7 @@ public class ProductController {
     }
 
     @GetMapping("/list")
-    public List<Product> getProducts(){
+    public List<Product> getProducts() {
         return productService.getProducts();
     }
 
@@ -42,35 +42,35 @@ public class ProductController {
     public void deleteProduct(@PathVariable long id) {
         productService.deleteProduct(id);
     }
-    
-     @GetMapping("/find-by-product-status/{productStatusId}")
+
+    @GetMapping("/find-by-product-status/{productStatusId}")
     public Set<Product> findProductsByProductStatus(@PathVariable long productStatusId) {
         return productService.findAllByProductStatus(productStatusId);
-        }
+    }
 
     @GetMapping("/show-received")
     public Set<Product> receivedProducts() {
         return productService.findAllReceivedProducts();
-        }
-        
-            @GetMapping("/received-count")
+    }
+
+    @GetMapping("/received-count")
     public int receivedProductsCount() {
         return productService.receivedProductsCount();
-            }
-        
+    }
+
     @GetMapping("/findbetweenweight/{min}/{max}")
     public List<Product> findAllByWeightBetween(@PathVariable("min") String min, @PathVariable("max") String max) {
-        return productService.findAllByWeightBetween(min,max);
+        return productService.findAllByWeightBetween(min, max);
     }
 
     @GetMapping("/findbetweendate/{min}/{max}")
     public List<Product> findAllByReceivedDateBetween(@PathVariable("min") String min, @PathVariable("max") String max) {
-        return productService.findAllByReceivedDateBetween(LocalDate.parse(min),LocalDate.parse(max));
+        return productService.findAllByReceivedDateBetween(LocalDate.parse(min), LocalDate.parse(max));
     }
 
     @GetMapping("/countbetweendate/{min}/{max}")
     public int countAllByReceivedDateBetween(@PathVariable("min") String min, @PathVariable("max") String max) {
-        return productService.countAllByReceivedDateBetween(LocalDate.parse(min),LocalDate.parse(max));
+        return productService.countAllByReceivedDateBetween(LocalDate.parse(min), LocalDate.parse(max));
     }
 
     @GetMapping("/countdate/{date}")
