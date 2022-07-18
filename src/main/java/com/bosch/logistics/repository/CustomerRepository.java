@@ -6,5 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface CustomerRepository extends JpaRepository <Customer, Long>{
+
     List<Customer> findAllByFirstNameStartsWithAndLastNameStartsWithOrderByTelAsc(String firstName, String lastName);
+    List<Customer> findByFirstNameContainingAndTelEndingWith(String fname, String phone);
+
+    List<Customer>  findByFirstNameStartingWithAndLastNameStartingWith(String fname, String lname);
+
+    Customer findByTel(String tel);
 }

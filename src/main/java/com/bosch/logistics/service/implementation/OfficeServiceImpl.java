@@ -17,20 +17,20 @@ public class OfficeServiceImpl implements OfficeService {
 
     private OfficeRepository officeRepository;
     private ProductService productService;
-
+    
     public OfficeServiceImpl(OfficeRepository officeRepository, ProductService productService) {
         this.officeRepository = officeRepository;
         this.productService = productService;
     }
-
+    
     @Override
     public List<Office> getOffices() {
         return officeRepository.findAll();
     }
 
     @Override
-    public Office getOffice(long officeId) {
-        return officeRepository.findById(officeId).orElseThrow(()->new IllegalArgumentException("Invalid id: " + officeId));
+    public Office getOffice(long id) {
+        return officeRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid id: " + id));
     }
 
     @Override
@@ -39,16 +39,17 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Override
-    public Office update(Office office, long officeId) {
-        office.setId(officeId);
+    public Office update(Office office, long id) {
+        office.setId(id);
         return officeRepository.save(office);
     }
 
     @Override
-    public void delete(long officeId) {
-        officeRepository.deleteById(officeId);
+    public void delete(long id) {
+        officeRepository.deleteById(id);
     }
-
+    
+    
     @Override
     public Set<Product> productsInOffice(long officeId) {
         Office office = getOffice(officeId);
@@ -63,4 +64,6 @@ public class OfficeServiceImpl implements OfficeService {
 
         return productService.countProductsOnAddress(address);
     }
+
+
 }

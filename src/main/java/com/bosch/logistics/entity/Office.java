@@ -12,6 +12,7 @@ public class Office {
     @JoinColumn(nullable = false, unique = true)
     private Address address;
 
+
     public Office(long id) {
         this.id = id;
     }

@@ -11,4 +11,7 @@ public interface CustomerService {
     Customer update(Customer book, long id);
     void delete(long id);
     List<Customer> findAllByFirstNameStartsWithAndLastNameStartsWithOrderByTelAsc(String firstName, String lastName);
+    List<Customer> findByFirstNameContainingAndTelEndingWith(String fname, String phone);
+    List<Customer>  findByFirstNameStartingWithAndLastNameStartingWith(String fname, String lname);
+    Customer findByTel(String tel);
 }
