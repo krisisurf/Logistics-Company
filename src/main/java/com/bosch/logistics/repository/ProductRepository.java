@@ -18,6 +18,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     int countAllByReceivedDateBetween(LocalDate min, LocalDate max);
 
     int countAllByReceivedDate(LocalDate date);
-
+    int countByReceiverAddress(Address address);
     List<Product> findAllByReceivedDate(LocalDate date);
 }
