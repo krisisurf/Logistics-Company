@@ -16,6 +16,11 @@ public class OfficeServiceImpl implements OfficeService {
     public OfficeServiceImpl(OfficeRepository officeRepository) {
         this.officeRepository = officeRepository;
     }
+    
+      public OfficeServiceImpl(OfficeRepository officeRepository, ProductService productService) {
+        this.officeRepository = officeRepository;
+        this.productService = productService;
+    }
 
     @Override
     public List<Office> getOffices() {
