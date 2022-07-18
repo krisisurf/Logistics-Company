@@ -43,6 +43,11 @@ public class ProductController {
     public void deleteProduct(@PathVariable long id) {
         service.deleteProduct(id);
     }
+    
+     @GetMapping("/find-by-product-status/{productStatusId}")
+    public Set<Product> findProductsByProductStatus(@PathVariable long productStatusId) {
+        return productService.findAllByProductStatus(productStatusId);
+        }
 
     @GetMapping("/findbetweenweight/{min}/{max}")
     public List<Product> findAllByWeightBetween(@PathVariable("min") String min, @PathVariable("max") String max) {
