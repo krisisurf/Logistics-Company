@@ -43,6 +43,11 @@ public class CustomerController {
         customerService.delete(id);
     }
 
+    @GetMapping("/first-last-name-order-by-tel-asc")
+    @ResponseBody
+    public List<Customer> findAllByFirstNameStartsWithAndLastNameStartsWithAndOrderByTelAsc(@RequestParam String startFirstName, @RequestParam String startLastName){
+        return customerService.findAllByFirstNameStartsWithAndLastNameStartsWithOrderByTelAsc(startFirstName, startLastName);
+
     @GetMapping("/containingFirstName/{fname}/telephoneEndingWith/{phone}")
     public List<Customer> findByFirstNameContainingAndTelEndingWith(@PathVariable("fname") String fname, @PathVariable("phone") String phone) {
         return this.customerService.findByFirstNameContainingAndTelEndingWith(fname,phone);
