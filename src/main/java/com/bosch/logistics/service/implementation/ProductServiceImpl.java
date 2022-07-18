@@ -58,6 +58,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Set<Product> findAllReceivedProducts() {
+        return repo.findAllByReceivedDateNotNull();
+    }
+    
+    @Override
     public List<Product> findAllByReceivedDateBetween(LocalDate min, LocalDate max) {
         return repo.findAllByReceivedDateBetween(min, max);
     }
