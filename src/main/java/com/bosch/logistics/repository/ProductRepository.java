@@ -9,6 +9,10 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findAllByWeightBetween(String min, String max);
 
+
+    Set<Product> findAllByProductStatus(ProductStatus productStatus);
+    Set<Product> findAllByReceivedDateNotNull();
+    int countByReceivedDateNotNull();
     List<Product>findAllByReceivedDateBetween(LocalDate min, LocalDate max);
 
     int countAllByReceivedDateBetween(LocalDate min, LocalDate max);
