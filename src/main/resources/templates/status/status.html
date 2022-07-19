@@ -6,6 +6,9 @@
 <header th:replace="fragments :: header"></header>
 
 <h4>Product Status list:</h4>
+<td><a class="btn btn-info"
+       th:href="@{/status/create-status}">Add</a></td>
+
 <div class="col-6">
     <h3 th:unless="${statuses} and ${statuses.size()}">There are no Product Statuses!</h3>
     <table th:if="${statuses.size()>0}" class="table table-hover">
@@ -18,8 +21,8 @@
             <td th:text="${status.status}"></td>
 
             <td><a class="btn btn-info"
-                   th:href="@{'/statusView/edit/'+${status.id}}">Edit</a></td>
-            <td><a class="btn btn-danger" th:href="@{'/statusView/delete/'+${status.id}}">Delete</a>
+                   th:href="@{'/status/edit/'+${status.id}}">Edit</a></td>
+            <td><a class="btn btn-danger" th:href="@{'/status/delete/'+${status.id}}">Delete</a>
             </td>
         </tr>
     </table>
