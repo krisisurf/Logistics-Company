@@ -5,12 +5,13 @@
 <body>
 <header th:replace="fragments :: header"></header>
 
-<h4>Product Status edit:</h4>
+<h4>Product Type Edit:</h4>
 <div class="col-6">
     <form action="#" th:action="@{/type/update/{id}(id=${productType.id})}" th:object="${productType}" method="post">
         <div class="form-group">
             <label for="type">Status:</label>
             <input class="form-control" type="text" th:field="*{typeName}" placeholder="Product Type" id="type">
+            <input class="form-control" type="text" th:field="*{price}" placeholder="Product Price" id="price">
           </div>
         <button type="submit" class="btn btn-primary">Update Product Type</button>
     </form>
