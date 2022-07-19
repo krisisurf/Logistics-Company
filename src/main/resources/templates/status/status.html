@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+
+<body>
+<header th:replace="fragments :: header"></header>
+
+<h4>Product Status list:</h4>
+<td><a class="btn btn-info"
+       th:href="@{/status/create-status}">Add</a></td>
+
+<div class="col-6">
+    <h3 th:unless="${statuses} and ${statuses.size()}">There are no Product Statuses!</h3>
+    <table th:if="${statuses.size()>0}" class="table table-hover">
+        <th>Id</th>
+        <th>Product Status</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <tr th:each="status : ${statuses}">
+            <td th:text="${status.id}"></td>
+            <td th:text="${status.status}"></td>
+
+            <td><a class="btn btn-info"
+                   th:href="@{'/status/edit/'+${status.id}}">Edit</a></td>
+            <td><a class="btn btn-danger" th:href="@{'/status/delete/'+${status.id}}">Delete</a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+
+<footer th:replace="fragments :: footer"></footer>
+</html>
