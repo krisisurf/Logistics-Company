@@ -76,4 +76,9 @@ public class CustomerController {
                 .filter(product -> product.getProductStatus().getId()==id)
                 .collect(Collectors.toSet());
     }
+
+    @GetMapping("/getTotalWeightAllProducts/{id}")
+    public int getTotalWeightAllProducts(@PathVariable long id){
+        return customerService.getTotalWeightAllProducts(id);
+    }
 }

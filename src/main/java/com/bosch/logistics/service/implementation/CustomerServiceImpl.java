@@ -1,6 +1,7 @@
 package com.bosch.logistics.service.implementation;
 
 import com.bosch.logistics.entity.Address;
+import com.bosch.logistics.entity.Product;
 import com.bosch.logistics.service.AddressService;
 import com.bosch.logistics.service.CustomerService;
 import com.bosch.logistics.entity.Customer;
@@ -85,5 +86,22 @@ public class CustomerServiceImpl implements CustomerService {
         List<Address> addresses = addressService.findByCity(city);
         int count = addresses.stream().mapToInt(a -> a.getCustomers().size()).sum();
         return count;
+    }
+
+
+
+    public int getTotalWeightAllProducts(long id){
+        int totalWeight=0;
+        for (Product product: getCustomer(id).getProductsSent()) {
+            if(product.getWeight()!=null){
+                totalWeight+= Integer.parseInt(product.getWeight()); //TODO MAKE weight to be numerical value
+            }
+        }
+        for (Product product: getCustomer(id).getProductsReceive()) {
+            if(product.getWeight()!=null){
+                totalWeight+= Integer.parseInt(product.getWeight()); //TODO MAKE weight to be numerical value
+            }
+        }
+        return totalWeight;
     }
 }
