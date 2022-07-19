@@ -42,6 +42,7 @@ public class Customer {
     @JoinColumn(nullable = false)
     private Address address;
 
+
     public long getId() {
         return id;
     }
@@ -64,6 +65,14 @@ public class Customer {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getAbbreviatedFullName(){
+        return firstName.charAt(0) + ". " + lastName;
+    }
+
+    public String getFullName(){
+        return firstName + " " + lastName;
     }
 
     public String getTel() {
