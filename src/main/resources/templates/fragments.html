@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:fragment="head">
+    <title>Logistics Company</title>
+    <meta charset="UTF-8">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+
+<header th:fragment="header">
+    <h1>Logistics Company</h1>
+<!--    <div class="col-3" sec:authorize="isAuthenticated()">-->
+<!--        Hello,-->
+<!--        <span sec:authentication="name"></span>-->
+<!--        <span sec:authentication="principal.authorities"></span>-->
+<!--        <a class="btn" th:href="@{/logout}">Logout</a>-->
+<!--    </div>-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navigation">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/api/product">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/status">Product Statuses</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<footer page-footer font-small>
+    <div class="footer-copyright text-center py-3">© 2022 Copyright:
+        <a href="#">Auto Service System</a>
+    </div>
+</footer>
