@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+
+<body>
+<header th:replace="fragments :: header"></header>
+
+<h4>Product Status edit:</h4>
+<div class="col-6">
+    <form action="#" th:action="@{/type/update/{id}(id=${productType.id})}" th:object="${productType}" method="post">
+        <div class="form-group">
+            <label for="type">Status:</label>
+            <input class="form-control" type="text" th:field="*{type_name}" placeholder="Product Type" id="type">
+          </div>
+        <button type="submit" class="btn btn-primary">Update Product Type</button>
+    </form>
+</div>
+</body>
+
+<footer th:replace="fragments :: footer"></footer>
+</html>
