@@ -1,7 +1,7 @@
 package com.bosch.logistics.controller.view;
 
 import com.bosch.logistics.entity.Product;
-import com.bosch.logistics.service.ProductService;
+import com.bosch.logistics.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +11,17 @@ import org.springframework.web.bind.annotation.*;
 public class ProductViewController {
 
     private ProductService productService;
+    private TypeService typeService;
+    private StatusService statusService;
+    private CustomerService customerService;
+    private AddressService addressService;
 
-    public ProductViewController(ProductService productService) {
+    public ProductViewController(ProductService productService, TypeService typeService, StatusService statusService, CustomerService customerService, AddressService addressService) {
         this.productService = productService;
+        this.typeService = typeService;
+        this.statusService = statusService;
+        this.customerService = customerService;
+        this.addressService = addressService;
     }
 
     @GetMapping
@@ -25,6 +33,10 @@ public class ProductViewController {
     @GetMapping("/create-product")
     public String showCreateProductForm(Model model) {
         model.addAttribute("product", new Product());
+        model.addAttribute("productTypes", typeService.getTypes());
+        model.addAttribute("statuses", statusService.getStatuses());
+        model.addAttribute("customers", customerService.getCustomers());
+        model.addAttribute("addresses", addressService.getAddresses());
         return "/product/create-product";
     }
 

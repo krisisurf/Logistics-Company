@@ -123,4 +123,15 @@ public class Address {
     public void setCustomers(Set<Customer> customers) {
         this.customers = customers;
     }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", number='" + number + '\'' +
+                ", code='" + code + '\'' +
+                '}';
+    }
 }
