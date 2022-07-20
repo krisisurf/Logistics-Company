@@ -17,4 +17,5 @@ public interface CustomerService {
     Customer findByTel(String tel);
     Set<Customer> findByCity(String city);
     int countByCity(String city);
+    public int getTotalWeightAllProducts(long id);
 }
