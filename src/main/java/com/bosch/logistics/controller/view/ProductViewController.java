@@ -6,6 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
+
 @Controller
 @RequestMapping("/product")
 public class ProductViewController {
@@ -15,18 +19,28 @@ public class ProductViewController {
     private StatusService statusService;
     private CustomerService customerService;
     private AddressService addressService;
+    private DeliveryTimeService deliveryTimeService;
 
-    public ProductViewController(ProductService productService, TypeService typeService, StatusService statusService, CustomerService customerService, AddressService addressService) {
+    public ProductViewController(ProductService productService, TypeService typeService, StatusService statusService, CustomerService customerService, AddressService addressService, DeliveryTimeService deliveryTimeService) {
         this.productService = productService;
         this.typeService = typeService;
         this.statusService = statusService;
         this.customerService = customerService;
         this.addressService = addressService;
+        this.deliveryTimeService = deliveryTimeService;
     }
 
     @GetMapping
     public String productView(Model model){
-        model.addAttribute("products", productService.getProducts());
+        List<Product> products = productService.getProducts();
+        model.addAttribute("products", products);
+        return "/product/product";
+    }
+
+    @GetMapping("/find-by-registeredDate/{registeredDate}")
+    public String productByRegisteredDateView(Model model, @PathVariable String registeredDate){
+        Set<Product> products = productService.findAllByRegisteredDateOrderByNameAsc(LocalDate.parse(registeredDate));
+        model.addAttribute("products", products);
         return "/product/product";
     }
 
@@ -37,6 +51,7 @@ public class ProductViewController {
         model.addAttribute("statuses", statusService.getStatuses());
         model.addAttribute("customers", customerService.getCustomers());
         model.addAttribute("addresses", addressService.getAddresses());
+        model.addAttribute("deliveryTimes", deliveryTimeService.getDeliveryTime());
         return "/product/create-product";
     }
 

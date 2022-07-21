@@ -152,4 +152,15 @@ public class Product {
     public void setDeliveryTime(DeliveryTime deliveryTime) {
         this.deliveryTime = deliveryTime;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", weight='" + weight + '\'' +
+                ", registeredDate=" + registeredDate +
+                ", receivedDate=" + receivedDate +
+                '}';
+    }
 }

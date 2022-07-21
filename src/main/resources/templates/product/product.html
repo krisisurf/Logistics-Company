@@ -37,6 +37,7 @@
         <th>Receiver</th>
         <th>Sender Address</th>
         <th>Receiver Address</th>
+        <th>Delivery Time</th>
 
         <th>Edit</th>
         <th>Delete</th>
@@ -164,6 +165,22 @@
                             <td th:text="${product.receiverAddress.street}"></td>
                             <td th:text="${product.receiverAddress.number}"></td>
                             <td th:text="${product.receiverAddress.code}"></td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+
+            <td>
+                <div class="divForeignKeys foreignKey" th:text="${product.deliveryTime.name}"></div>
+                <div class="hide">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                        </tr>
+                        <tr>
+                            <td th:text="${product.deliveryTime.id}"></td>
+                            <td th:text="${product.deliveryTime.name}"></td>
                         </tr>
                     </table>
                 </div>
