@@ -1,5 +1,7 @@
 package com.bosch.logistics.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -25,8 +27,10 @@ public class Product {
     private String weight;
 
     @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate registeredDate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate receivedDate;
 
     @ManyToOne
@@ -151,5 +155,16 @@ public class Product {
 
     public void setDeliveryTime(DeliveryTime deliveryTime) {
         this.deliveryTime = deliveryTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", weight='" + weight + '\'' +
+                ", registeredDate=" + registeredDate +
+                ", receivedDate=" + receivedDate +
+                '}';
     }
 }

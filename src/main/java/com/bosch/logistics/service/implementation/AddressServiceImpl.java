@@ -16,6 +16,10 @@ public class AddressServiceImpl implements AddressService {
         this.repo = repo;
     }
 
+    public List<Address> findAllAddressesByCityOrCode(String city, String code) {
+        return repo.findAllAddressesByCityOrCode(city, code);
+    }
+
     @Override
     public List<Address> getAddresses() {
         return repo.findAll();
@@ -43,7 +47,20 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public List<Address> findAllAddressesByCityOrCode(String city, String code) {
-        return repo.findAllAddressesByCityOrCode(city, code);
+    public List<Address> findByCity(String city) {
+        return repo.findAllByCity(city);
     }
+
+    @Override
+    public int countByCity(String city) {
+        return repo.countByCity(city);
+    }
+
+
+    @Override
+    public List<Address> findByCode(String code) {
+        return repo.findAllByCode(code);
+    }
+
+
 }

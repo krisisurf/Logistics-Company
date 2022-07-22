@@ -4,6 +4,7 @@ import com.bosch.logistics.entity.Product;
 import com.bosch.logistics.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -13,8 +14,8 @@ public class ProductController {
 
     private ProductService productService;
 
-    public ProductController(ProductService productService) {
-        this.productService = productService;
+    public ProductController(ProductService service) {
+        this.productService = service;
     }
 
     @GetMapping
@@ -56,4 +57,45 @@ public class ProductController {
     public int receivedProductsCount() {
         return productService.receivedProductsCount();
     }
+
+    @GetMapping("/findbetweenweight/{min}/{max}")
+    public Set<Product> findAllByWeightBetween(@PathVariable("min") String min, @PathVariable("max") String max) {
+        return productService.findAllByWeightBetween(min, max);
+    }
+
+    @GetMapping("/findbetweendate/{min}/{max}")
+    public Set<Product> findAllByReceivedDateBetween(@PathVariable("min") String min, @PathVariable("max") String max) {
+        return productService.findAllByReceivedDateBetween(LocalDate.parse(min), LocalDate.parse(max));
+    }
+
+    @GetMapping("/countbetweendate/{min}/{max}")
+    public int countAllByReceivedDateBetween(@PathVariable("min") String min, @PathVariable("max") String max) {
+        return productService.countAllByReceivedDateBetween(LocalDate.parse(min), LocalDate.parse(max));
+    }
+
+    @GetMapping("/countdate/{date}")
+    public int countAllByReceivedDate(@PathVariable("date") String date) {
+        return productService.countAllByReceivedDate(LocalDate.parse(date));
+    }
+
+    @GetMapping("/finddate/{date}")
+    public Set<Product> findAllByReceivedDate(@PathVariable("date") String date) {
+        return productService.findAllByReceivedDate(LocalDate.parse(date));
+    }
+
+    @GetMapping("/products-by-customers-city/{customerCity}")
+    public Set<Product> productsByCustomersCity(@PathVariable String customerCity){
+        return productService.productsByCustomersCity(customerCity);
+    }
+
+    @GetMapping("/count-products-by-customers-city/{customerCity}")
+    public int countProductsByCustomersCity(@PathVariable String customerCity){
+        return productService.countProductsByCustomersCity(customerCity);
+    }
+
+    @GetMapping("/find-by-registeredDate/{registeredDate}")
+    public Set<Product> findAllByRegisteredDateOrderByNameAsc(@PathVariable String registeredDate){
+        return productService.findAllByRegisteredDateOrderByNameAsc(LocalDate.parse(registeredDate));
+    }
+
 }

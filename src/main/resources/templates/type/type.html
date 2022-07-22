@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+
+<body>
+<header th:replace="fragments :: header"></header>
+
+<h4>Product Type list:</h4>
+<td><a class="btn btn-info"
+       th:href="@{/type/create-type}">Add</a></td>
+
+<div class="col-6">
+    <h3 th:unless="${types} and ${types.size()}">There are no Product Types!</h3>
+    <table th:if="${types.size()>0}" class="table table-hover">
+        <th>Id</th>
+        <th>Product Type</th>
+        <th>Price</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <tr th:each="type : ${types}">
+            <td th:text="${type.id}"></td>
+            <td th:text="${type.typeName}"></td>
+            <td th:text="${type.price}"></td>
+
+            <td><a class="btn btn-info"
+                   th:href="@{'/type/edit/'+${type.id}}">Edit</a></td>
+            <td><a class="btn btn-danger" th:href="@{'/type/delete/'+${type.id}}">Delete</a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+
+<footer th:replace="fragments :: footer"></footer>
+</html>
