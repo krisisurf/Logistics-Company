@@ -109,6 +109,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> findAllByRegisteredDate(LocalDate date) {
+        List<Product> products = repo.findAllByRegisteredDate(date);
+        //products.sort(product -> customerService.getCustomer(getProduct().getSender()));
+        return products;
+    }
+
+
+    @Override
     public List<Product> findAllByReceivedDate(LocalDate date) {
         return repo.findAllByReceivedDate(date);
     }

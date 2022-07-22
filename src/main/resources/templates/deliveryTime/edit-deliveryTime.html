@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+
+<body>
+<header th:replace="fragments :: header"></header>
+
+<h4>Product Delivery Time edit:</h4>
+<div class="col-6">
+    <form action="#" th:action="@{/deliveryTime/update/{id}(id=${productDeliveryTime.id})}" th:object="${productDeliveryTime}" method="post">
+
+        <div class="form-group">
+            <label for="name">Delivery Time</label>
+            <input class="form-control" type="text" th:field="*{name}" placeholder="Product Delivery Time Name" id="name">
+
+            <label for="deliveryDays">Delivery Days:</label>
+            <input class="form-control" type="number" th:field="${productDeliveryTime.deliveryDays}" placeholder="deliveryDays" id="deliveryDays">
+
+            <label for="deliveryHours">Delivery Hours:</label>
+            <input class="form-control" type="number" th:field="*{deliveryHours}" placeholder="deliveryHours" id="deliveryHours">
+            <label for="price">Price:</label>
+            <input class="form-control" type="number" th:field="*{price}" placeholder="price" id="price">
+
+            <label for="isAvailable">Is Available:</label>
+            <input class="form-control" type="checkbox" th:field="*{isAvailable}" id="isAvailable">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Delivery Time</button>
+    </form>
+
+</div>
+</body>
+
+<footer th:replace="fragments :: footer"></footer>
+</html>

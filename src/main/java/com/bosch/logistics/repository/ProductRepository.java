@@ -23,4 +23,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     int countAllByReceivedDate(LocalDate date);
     int countByReceiverAddress(Address address);
     List<Product> findAllByReceivedDate(LocalDate date);
+    List<Product> findAllByRegisteredDate(LocalDate date);
+
 }

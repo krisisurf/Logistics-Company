@@ -69,27 +69,21 @@ public class DeliveryTime {
     public void setDeliveryHours(int deliveryHours) {
         this.deliveryHours = deliveryHours;
     }
-
+    public boolean getIsAvailable() {
+        return isAvailable;
+    }
+    public void setIsAvailable(boolean isAvailable) {
+        this.isAvailable = isAvailable;
+    }
     public double getPrice() {
         return price;
     }
-
     public void setPrice(double price) {
         this.price = price;
     }
-
-    public boolean isAvailable() {
-        return isAvailable;
-    }
-
-    public void setAvailable(boolean available) {
-        isAvailable = available;
-    }
-
     public Set<Product> getProducts() {
         return products;
     }
-
     public void setProducts(Set<Product> products) {
         this.products = products;
     }
