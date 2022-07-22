@@ -17,80 +17,80 @@ import java.util.Set;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private ProductRepository repo;
+    private ProductRepository productRepository;
     private CustomerService customerService;
 
-    public ProductServiceImpl(ProductRepository repo, CustomerService customerService) {
-        this.repo = repo;
+    public ProductServiceImpl(ProductRepository productRepository, CustomerService customerService) {
+        this.productRepository = productRepository;
         this.customerService = customerService;
     }
 
     @Override
     public List<Product> getProducts() {
-        return repo.findAll();
+        return productRepository.findAll();
     }
 
     @Override
     public Product getProduct(long id) {
-        return repo.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid id: " + id));
+        return productRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid id: " + id));
     }
 
     @Override
     public Product createProduct(Product product) {
-        return repo.save(product);
+        return productRepository.save(product);
     }
 
     @Override
     public Product updateProduct(Product product, long id) {
         product.setId(id);
-        return repo.save(product);
+        return productRepository.save(product);
     }
 
     @Override
     public void deleteProduct(long id) {
-        repo.deleteById(id);
+        productRepository.deleteById(id);
     }
 
     @Override
-    public List<Product> findAllByWeightBetween(String min, String max) {
-        return repo.findAllByWeightBetween(min, max);
+    public Set<Product> findAllByWeightBetween(String min, String max) {
+        return productRepository.findAllByWeightBetween(min, max);
     }
 
     @Override
     public Set<Product> findAllByProductStatus(long productStatusId) {
         ProductStatus productStatus = new ProductStatus(productStatusId);
-        return repo.findAllByProductStatus(productStatus);
+        return productRepository.findAllByProductStatus(productStatus);
     }
 
 
     @Override
     public Set<Product> findAllReceivedProducts() {
-        return repo.findAllByReceivedDateNotNull();
+        return productRepository.findAllByReceivedDateNotNull();
     }
 
     @Override
-    public List<Product> findAllByReceivedDateBetween(LocalDate min, LocalDate max) {
-        return repo.findAllByReceivedDateBetween(min, max);
+    public Set<Product> findAllByReceivedDateBetween(LocalDate min, LocalDate max) {
+        return productRepository.findAllByReceivedDateBetween(min, max);
     }
 
     @Override
     public int receivedProductsCount() {
-        return repo.countByReceivedDateNotNull();
+        return productRepository.countByReceivedDateNotNull();
     }
 
     @Override
     public int countAllByReceivedDateBetween(LocalDate min, LocalDate max) {
-        return repo.countAllByReceivedDateBetween(min, max);
+        return productRepository.countAllByReceivedDateBetween(min, max);
     }
 
     @Override
     public int countAllByReceivedDate(LocalDate date) {
-        return repo.countAllByReceivedDate(date);
+        return productRepository.countAllByReceivedDate(date);
     }
 
     @Override
     public int countProductsOnAddress(Address address) {
-        return repo.countByReceiverAddress(address);
+        return productRepository.countByReceiverAddress(address);
     }
 
     @Override
@@ -109,7 +109,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findAllByReceivedDate(LocalDate date) {
-        return repo.findAllByReceivedDate(date);
+    public Set<Product> findAllByReceivedDate(LocalDate date) {
+        return productRepository.findAllByReceivedDate(date);
+    }
+
+    @Override
+    public Set<Product> findAllByRegisteredDateOrderByNameAsc(LocalDate registeredDate) {
+        return productRepository.findAllByRegisteredDateOrderByNameAsc(registeredDate);
     }
 }

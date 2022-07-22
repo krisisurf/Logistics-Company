@@ -18,7 +18,7 @@ public class ProductController {
         this.productService = service;
     }
 
-    @GetMapping("/list")
+    @GetMapping
     public List<Product> getProducts() {
         return productService.getProducts();
     }
@@ -59,12 +59,12 @@ public class ProductController {
     }
 
     @GetMapping("/findbetweenweight/{min}/{max}")
-    public List<Product> findAllByWeightBetween(@PathVariable("min") String min, @PathVariable("max") String max) {
+    public Set<Product> findAllByWeightBetween(@PathVariable("min") String min, @PathVariable("max") String max) {
         return productService.findAllByWeightBetween(min, max);
     }
 
     @GetMapping("/findbetweendate/{min}/{max}")
-    public List<Product> findAllByReceivedDateBetween(@PathVariable("min") String min, @PathVariable("max") String max) {
+    public Set<Product> findAllByReceivedDateBetween(@PathVariable("min") String min, @PathVariable("max") String max) {
         return productService.findAllByReceivedDateBetween(LocalDate.parse(min), LocalDate.parse(max));
     }
 
@@ -79,7 +79,7 @@ public class ProductController {
     }
 
     @GetMapping("/finddate/{date}")
-    public List<Product> findAllByReceivedDate(@PathVariable("date") String date) {
+    public Set<Product> findAllByReceivedDate(@PathVariable("date") String date) {
         return productService.findAllByReceivedDate(LocalDate.parse(date));
     }
 
@@ -91,6 +91,11 @@ public class ProductController {
     @GetMapping("/count-products-by-customers-city/{customerCity}")
     public int countProductsByCustomersCity(@PathVariable String customerCity){
         return productService.countProductsByCustomersCity(customerCity);
+    }
+
+    @GetMapping("/find-by-registeredDate/{registeredDate}")
+    public Set<Product> findAllByRegisteredDateOrderByNameAsc(@PathVariable String registeredDate){
+        return productService.findAllByRegisteredDateOrderByNameAsc(LocalDate.parse(registeredDate));
     }
 
 }
