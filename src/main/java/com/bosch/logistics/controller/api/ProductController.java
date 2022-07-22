@@ -1,9 +1,11 @@
 package com.bosch.logistics.controller.api;
 
+import com.bosch.logistics.entity.Customer;
 import com.bosch.logistics.entity.Product;
 import com.bosch.logistics.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -56,4 +58,21 @@ public class ProductController {
     public int receivedProductsCount() {
         return productService.receivedProductsCount();
     }
+
+    @GetMapping("/product-status-id/{id}")
+    public List<Product> nullableStatusId(@PathVariable long id){
+        return productService.findAllByReceivedDateIsNullAndProductStatusId(id);
+    }
+    @GetMapping("/customer-sender-address/{addressId}")
+    public List<Customer> senderAddressTown(@PathVariable String addressId){
+        return productService.findAllBySenderId(addressId);
+    }
+    @GetMapping("/products-received/customer/{id}/{startDate}/{endDate}")
+    public List<Product> productsReceived(@PathVariable long id, @PathVariable LocalDate startDate,@PathVariable LocalDate endDate){
+        return productService.findAllByReceiverAndReceivedDateBetween(id,startDate,endDate);
+    }
+//    @GetMapping("/products-received/customer/{id}/{startDate}")
+//    public List<Product> productsReceived(@PathVariable long id, LocalDate startDate, LocalDate endDate){
+//        return productService.findAllReceivedDate(startDate);
+//    }
 }

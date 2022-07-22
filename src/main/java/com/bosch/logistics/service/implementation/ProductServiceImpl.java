@@ -1,12 +1,15 @@
 package com.bosch.logistics.service.implementation;
 
 import com.bosch.logistics.entity.Address;
+import com.bosch.logistics.entity.Customer;
 import com.bosch.logistics.entity.Product;
 import com.bosch.logistics.entity.ProductStatus;
 import com.bosch.logistics.repository.ProductRepository;
+import com.bosch.logistics.service.CustomerService;
 import com.bosch.logistics.service.ProductService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -14,9 +17,11 @@ import java.util.Set;
 public class ProductServiceImpl implements ProductService {
 
     private ProductRepository repo;
+    private CustomerService service;
 
-    public ProductServiceImpl(ProductRepository repo) {
+    public ProductServiceImpl(ProductRepository repo, CustomerService service) {
         this.repo = repo;
+        this.service = service;
     }
 
     @Override
@@ -65,4 +70,26 @@ public class ProductServiceImpl implements ProductService {
     public int countProductsOnAddress(Address address) {
         return repo.countByReceiverAddress(address);
     }
+
+    @Override
+    public List<Product> findAllByReceivedDateIsNullAndProductStatusId(long id) {
+        return repo.findAllByReceivedDateIsNullAndProductStatusId(id);
+    }
+
+    @Override
+    public List<Customer> findAllBySenderId(String city) {
+        return repo.findAllBySenderId(city);
+    }
+
+    @Override
+    public List<Product> findAllByReceiverAndReceivedDateBetween(long id, LocalDate startDate, LocalDate endDate) {
+        return repo.findAllByReceiverAndReceivedDateBetween(service.getCustomer(id),startDate,endDate);
+    }
+
+    @Override
+    public List<Product> findAllByReceivedDate(LocalDate date) {
+        return repo.findAllByReceivedDate(date);
+    }
+
+
 }
