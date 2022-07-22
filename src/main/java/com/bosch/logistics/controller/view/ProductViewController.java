@@ -31,27 +31,31 @@ public class ProductViewController {
     }
 
     @GetMapping
-    public String productView(Model model){
+    public String productView(Model model) {
         List<Product> products = productService.getProducts();
         model.addAttribute("products", products);
         return "/product/product";
     }
 
     @GetMapping("/find-by-registeredDate/{registeredDate}")
-    public String productByRegisteredDateView(Model model, @PathVariable String registeredDate){
+    public String productByRegisteredDateView(Model model, @PathVariable String registeredDate) {
         Set<Product> products = productService.findAllByRegisteredDateOrderByNameAsc(LocalDate.parse(registeredDate));
         model.addAttribute("products", products);
         return "/product/product";
     }
 
-    @GetMapping("/create-product")
-    public String showCreateProductForm(Model model) {
-        model.addAttribute("product", new Product());
+    private void addProductAttributes(Model model, Product product) {
+        model.addAttribute("product", product);
         model.addAttribute("productTypes", typeService.getTypes());
         model.addAttribute("statuses", statusService.getStatuses());
         model.addAttribute("customers", customerService.getCustomers());
         model.addAttribute("addresses", addressService.getAddresses());
         model.addAttribute("deliveryTimes", deliveryTimeService.getDeliveryTime());
+    }
+
+    @GetMapping("/create-product")
+    public String showCreateProductForm(Model model) {
+        addProductAttributes(model, new Product());
         return "/product/create-product";
     }
 
@@ -63,7 +67,7 @@ public class ProductViewController {
 
     @GetMapping("/edit/{id}")
     public String showEditProductForm(Model model, @PathVariable long id) {
-        model.addAttribute("product", productService.getProduct(id));
+        addProductAttributes(model, productService.getProduct(id));
         return "/product/edit-product";
     }
 
