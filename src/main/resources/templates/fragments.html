@@ -6,45 +6,31 @@ and open the template in the editor.
 -->
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:fragment="head">
-    <title>Auto Service</title>
+    <title>Logistics Company</title>
     <meta charset="UTF-8">
     <link href="/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 </head>
 
 <header th:fragment="header">
-    <h1>Auto Service System</h1>
-    <div class="col-3" sec:authorize="isAuthenticated()">
-        Hello,
-        <span sec:authentication="name"></span>
-        <span sec:authentication="principal.authorities"></span>
-        <a class="btn" th:href="@{/logout}">Logout</a>
-    </div>
+    <h1>Logistics Company</h1>
+<!--    <div class="col-3" sec:authorize="isAuthenticated()">-->
+<!--        Hello,-->
+<!--        <span sec:authentication="name"></span>-->
+<!--        <span sec:authentication="principal.authorities"></span>-->
+<!--        <a class="btn" th:href="@{/logout}">Logout</a>-->
+<!--    </div>-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navigation">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="/api/product">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/typeOfServiceView">Type of Services</a>
+                    <a class="nav-link" href="/status">Product Statuses</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/employeeView">Employees</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/historyView">Histories</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/carView">Cars</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/customerView">Customer</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/brandView">Brands</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/typeOfServicePriceOverchargeView">Price Overcharge</a>
+                    <a class="nav-link" href="/customer">Customers</a>
+
                 </li>
             </ul>
         </div>
@@ -53,6 +39,6 @@ and open the template in the editor.
 
 <footer page-footer font-small>
     <div class="footer-copyright text-center py-3">© 2022 Copyright:
-        <a href="#">Auto Service System</a>
+        <a href="#">Logistics Company</a>
     </div>
 </footer>
