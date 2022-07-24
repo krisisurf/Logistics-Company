@@ -6,11 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/status")
 public class StatusViewController {
+
     private StatusService statusService;
 
     public StatusViewController(StatusService statusService) {
@@ -18,9 +17,8 @@ public class StatusViewController {
     }
 
     @GetMapping
-    public String getStatuses(Model model){
-        List<ProductStatus> statuses = statusService.getStatuses();
-        model.addAttribute("statuses",statuses);
+    public String statusView(Model model) {
+        model.addAttribute("statuses", statusService.getStatuses());
         return "/status/status";
     }
 
@@ -35,16 +33,19 @@ public class StatusViewController {
         statusService.create(status);
         return "redirect:/status";
     }
+
     @GetMapping("/edit/{id}")
-    public String showEditStatus(Model model, @PathVariable Long id) {
+    public String showEditStatus(Model model, @PathVariable long id) {
         model.addAttribute("status", statusService.getStatus(id));
         return "/status/edit-status";
     }
+
     @PostMapping("/update/{id}")
-    public String updateStatus(Model model, @PathVariable Long id, ProductStatus status) {
+    public String updateStatus(Model model, @PathVariable long id, ProductStatus status) {
         statusService.update(status, id);
         return "redirect:/status";
     }
+
     @GetMapping("/delete/{id}")
     public String deleteStatus(@PathVariable int id) {
         statusService.delete(id);

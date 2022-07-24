@@ -1,6 +1,5 @@
 package com.bosch.logistics.controller.api;
 
-import com.bosch.logistics.entity.Customer;
 import com.bosch.logistics.entity.Product;
 import com.bosch.logistics.service.ProductService;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +14,8 @@ public class ProductController {
 
     private ProductService productService;
 
-    public ProductController(ProductService productService) {
-        this.productService = productService;
+    public ProductController(ProductService service) {
+        this.productService = service;
     }
 
     @GetMapping
@@ -59,20 +58,53 @@ public class ProductController {
         return productService.receivedProductsCount();
     }
 
-    @GetMapping("/product-status-id/{id}")
-    public List<Product> nullableStatusId(@PathVariable long id){
-        return productService.findAllByReceivedDateIsNullAndProductStatusId(id);
+    @GetMapping("/not-received-products-by-status/{statusId}")
+    public Set<Product> notReceivedProductsByStatus(@PathVariable long statusId) {
+        return productService.findNotReceivedProductsByStatusId(statusId);
     }
-    @GetMapping("/customer-sender-address/{addressId}")
-    public List<Customer> senderAddressTown(@PathVariable String addressId){
-        return productService.findAllBySenderId(addressId);
+
+    @GetMapping("/products-received/customer/{receiverId}/{startDate}/{endDate}")
+    public Set<Product> findAllByReceiverAndReceivedDateBetween(@PathVariable long receiverId, @PathVariable LocalDate startDate, @PathVariable LocalDate endDate) {
+        return productService.findAllByReceiverAndReceivedDateBetween(receiverId, startDate, endDate);
     }
-    @GetMapping("/products-received/customer/{id}/{startDate}/{endDate}")
-    public List<Product> productsReceived(@PathVariable long id, @PathVariable LocalDate startDate,@PathVariable LocalDate endDate){
-        return productService.findAllByReceiverAndReceivedDateBetween(id,startDate,endDate);
+
+    @GetMapping("/find-between-weight/{min}/{max}")
+    public Set<Product> findAllByWeightBetween(@PathVariable String min, @PathVariable String max) {
+        return productService.findAllByWeightBetween(min, max);
     }
-//    @GetMapping("/products-received/customer/{id}/{startDate}")
-//    public List<Product> productsReceived(@PathVariable long id, LocalDate startDate, LocalDate endDate){
-//        return productService.findAllReceivedDate(startDate);
-//    }
+
+    @GetMapping("/find-between-received-date/{min}/{max}")
+    public Set<Product> findAllByReceivedDateBetween(@PathVariable String min, @PathVariable String max) {
+        return productService.findAllByReceivedDateBetween(LocalDate.parse(min), LocalDate.parse(max));
+    }
+
+    @GetMapping("/count-between-received-date/{min}/{max}")
+    public int countAllByReceivedDateBetween(@PathVariable String min, @PathVariable String max) {
+        return productService.countAllByReceivedDateBetween(LocalDate.parse(min), LocalDate.parse(max));
+    }
+
+    @GetMapping("/find-by-received-date/{date}")
+    public Set<Product> findAllByReceivedDate(@PathVariable String date) {
+        return productService.findAllByReceivedDate(LocalDate.parse(date));
+    }
+
+    @GetMapping("/count-by-received-date/{date}")
+    public int countAllByReceivedDate(@PathVariable String date) {
+        return productService.countAllByReceivedDate(LocalDate.parse(date));
+    }
+
+    @GetMapping("/products-by-customers-city/{customerCity}")
+    public Set<Product> productsByCustomersCity(@PathVariable String customerCity) {
+        return productService.productsByCustomersCity(customerCity);
+    }
+
+    @GetMapping("/count-products-by-customers-city/{customerCity}")
+    public int countProductsByCustomersCity(@PathVariable String customerCity) {
+        return productService.countProductsByCustomersCity(customerCity);
+    }
+
+    @GetMapping("/find-by-registeredDate/{registeredDate}")
+    public Set<Product> findAllByRegisteredDateOrderByNameAsc(@PathVariable String registeredDate) {
+        return productService.findAllByRegisteredDateOrderByNameAsc(LocalDate.parse(registeredDate));
+    }
 }

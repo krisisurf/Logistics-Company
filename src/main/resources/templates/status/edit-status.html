@@ -5,6 +5,7 @@
 <body>
 <header th:replace="fragments :: header"></header>
 
+<<<<<<< HEAD
 <h4>Type of service edit:</h4>
 <div class="col-6">
     <form action="#" th:action="@{/status/update/{id}(id=${status.id})}" th:object="${status}" method="post">
@@ -12,6 +13,15 @@
             <label for="status">Status:</label>
             <input class="form-control" type="text" th:field="*{status}" placeholder="Product Status" id="status">
         </div>
+=======
+<h4>Product Status edit:</h4>
+<div class="col-6">
+    <form action="#" th:action="@{/status/update/{id}(id=${productStatus.id})}" th:object="${productStatus}" method="post">
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <input class="form-control" type="text" th:field="*{status}" placeholder="Product Status" id="status">
+          </div>
+>>>>>>> master
         <button type="submit" class="btn btn-primary">Update Product Status</button>
     </form>
 </div>

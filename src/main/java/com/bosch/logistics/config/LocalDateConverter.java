@@ -21,7 +21,6 @@ public class LocalDateConverter implements Converter<String, LocalDate> {
             .collect(Collectors.toList());
 
     @Override
-
     public LocalDate convert(String s) {
 
         for (DateTimeFormatter dateTimeFormatter : DATE_TIME_FORMATTERS) {
