@@ -3,7 +3,6 @@
 <head th:replace="fragments :: head"></head>
 <body>
 <header th:replace="fragments :: header"></header>
-<<<<<<< HEAD
 <h4>Register the Status</h4>
 <div class="col-6">
     <form action="#" th:action="@{/status/create}" th:object="${status}" method="post">
@@ -13,17 +12,6 @@
         </div>
         <button type="submit" class="btn btn-primary">Save Brand</button>
     </form>
-=======
-<h4>Register the Product Status</h4>
-<div class="col-6">
-  <form action="#" th:action="@{/status/create}" th:object="${productStatus}" method="post">
-    <div class="form-group">
-      <label for="status">Status</label>
-      <input class="form-control" type="text" th:field="*{status}" placeholder="Product Status" id="status">
-    </div>
-    <button type="submit" class="btn btn-primary">Save Product Status</button>
-  </form>
->>>>>>> master
 </div>
 <footer th:replace="fragments :: footer"></footer>
 </body>

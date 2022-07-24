@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -116,5 +117,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Set<Product> findAllByRegisteredDateOrderByNameAsc(LocalDate registeredDate) {
         return productRepository.findAllByRegisteredDateOrderByNameAsc(registeredDate);
+    }
+
+    @Override
+    public Set<Product> findNotReceivedProductsByStatusId(long statusId) {
+        return productRepository.findAllByReceivedDateIsNullAndProductStatusId(statusId);
+    }
+
+    @Override
+    public Set<Product> findAllByReceiverAndReceivedDateBetween(long id, LocalDate startDate, LocalDate endDate) {
+        return productRepository.findAllByReceiverAndReceivedDateBetween(customerService.getCustomer(id), startDate, endDate);
     }
 }

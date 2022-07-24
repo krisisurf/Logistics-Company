@@ -5,7 +5,6 @@
 <body>
 <header th:replace="fragments :: header"></header>
 
-<<<<<<< HEAD
 <h4>Status list:</h4>
 <td><a class="btn btn-success"
        th:href="@{'/status/create-status'}">Add</a></td>
@@ -14,26 +13,11 @@
     <table th:if="${statuses.size()>0}" class="table table-hover">
         <th>Id</th>
         <th>Status</th>
-=======
-<h4>Product Status list:</h4>
-<td><a class="btn btn-info"
-       th:href="@{/status/create-status}">Add</a></td>
-
-<div class="col-6">
-    <h3 th:unless="${statuses} and ${statuses.size()}">There are no Product Statuses!</h3>
-    <table th:if="${statuses.size()>0}" class="table table-hover">
-        <th>Id</th>
-        <th>Product Status</th>
->>>>>>> master
         <th>Edit</th>
         <th>Delete</th>
         <tr th:each="status : ${statuses}">
             <td th:text="${status.id}"></td>
             <td th:text="${status.status}"></td>
-<<<<<<< HEAD
-=======
-
->>>>>>> master
             <td><a class="btn btn-info"
                    th:href="@{'/status/edit/'+${status.id}}">Edit</a></td>
             <td><a class="btn btn-danger" th:href="@{'/status/delete/'+${status.id}}">Delete</a>

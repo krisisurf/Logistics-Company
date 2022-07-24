@@ -1,6 +1,7 @@
 package com.bosch.logistics.service;
 
 import com.bosch.logistics.entity.Address;
+import com.bosch.logistics.entity.Customer;
 import com.bosch.logistics.entity.Product;
 
 import java.time.LocalDate;
@@ -33,10 +34,14 @@ public interface ProductService {
     int countAllByReceivedDate(LocalDate date);
 
     Set<Product> findAllByReceivedDate(LocalDate date);
-    
+
     Set<Product> findAllByRegisteredDateOrderByNameAsc(LocalDate registeredDate);
 
     int countProductsOnAddress(Address address);
+
+    Set<Product> findNotReceivedProductsByStatusId(long statusId);
+
+    Set<Product> findAllByReceiverAndReceivedDateBetween(long receiverId, LocalDate startDate, LocalDate endDate);
 
     Set<Product> productsByCustomersCity(String city);
 
