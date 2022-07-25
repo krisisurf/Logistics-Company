@@ -14,12 +14,14 @@
             <input class="form-control" type="text" th:field="*{name}" placeholder="Product Delivery Time Name" id="name">
 
             <label for="deliveryDays">Delivery Days:</label>
-            <input class="form-control" type="number" th:field="${productDeliveryTime.deliveryDays}" placeholder="deliveryDays" id="deliveryDays">
+            <input class="form-control" type="number"step="1" min="0" max="365" th:field="${productDeliveryTime.deliveryDays}" placeholder="deliveryDays" id="deliveryDays">
 
             <label for="deliveryHours">Delivery Hours:</label>
-            <input class="form-control" type="number" th:field="*{deliveryHours}" placeholder="deliveryHours" id="deliveryHours">
+            <input class="form-control" type="number"step="1" min="0" max="23" th:field="*{deliveryHours}" placeholder="deliveryHours" id="deliveryHours">
+
             <label for="price">Price:</label>
-            <input class="form-control" type="number" th:field="*{price}" placeholder="price" id="price">
+            <input class="form-control" type="number" step="any" min="0" max="2147483647" th:field="*{price}" placeholder="price" id="price">
+
 
             <label for="isAvailable">Is Available:</label>
             <input class="form-control" type="checkbox" th:field="*{isAvailable}" id="isAvailable">

@@ -6,13 +6,13 @@ and open the template in the editor.
 -->
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:fragment="head">
-    <title>Auto Service</title>
+    <title>Logistics Service</title>
     <meta charset="UTF-8">
     <link href="/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 </head>
 
 <header th:fragment="header">
-    <h1>Auto Service System</h1>
+    <h1>Logistics Service System</h1>
     <div class="col-3" sec:authorize="isAuthenticated()">
         Hello,
         <span sec:authentication="name"></span>
@@ -23,28 +23,10 @@ and open the template in the editor.
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="/deliveryTime">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/typeOfServiceView">Type of Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/employeeView">Employees</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/historyView">Histories</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/carView">Cars</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/customerView">Customer</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/brandView">Brands</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/typeOfServicePriceOverchargeView">Price Overcharge</a>
+                    <a class="nav-link" href="/deliveryTime/create-deliveryTime">Create new delivery</a>
                 </li>
             </ul>
         </div>
@@ -53,6 +35,6 @@ and open the template in the editor.
 
 <footer page-footer font-small>
     <div class="footer-copyright text-center py-3">© 2022 Copyright:
-        <a href="#">Auto Service System</a>
+        <a href="#">Logistics Service System</a>
     </div>
 </footer>
