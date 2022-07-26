@@ -16,16 +16,14 @@
         <th>Last Name</th>
         <th>Telephone number</th>
         <th>Address</th>
-        <th>Address</th>
-        <th>Products sent</th>
-        <th>Products received</th>
+        <th>Edit</th>
+        <th>Delete</th>
         <tr th:each="customer : ${customers}">
             <td th:text="${customer.id}"></td>
             <td th:text="${customer.firstName}"></td>
             <td th:text="${customer.lastName}"></td>
             <td th:text="${customer.tel}"></td>
             <td th:text="${customer.address.city}+ ' -> ' + ${customer.address.street}"></td>
-            <td th:text="${customer.productsSent}"></td>
             <td><a class="btn btn-info"
                    th:href="@{'/customer/edit/'+${customer.id}}">Edit</a></td>
             <td><a class="btn btn-danger" th:href="@{'/customer/delete/'+${customer.id}}">Delete</a>
