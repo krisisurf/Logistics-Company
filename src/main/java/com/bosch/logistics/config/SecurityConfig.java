@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").authenticated()
                 .antMatchers("/api/address", "/api/customer", "/customer", "/product").hasAnyAuthority("ADMIN", "OFFICE_EMPLOYEE")
                 .antMatchers("/create-customer", "/create", "/edit", "/update").hasAnyAuthority("ADMIN")
-                .antMatchers("/api/address").hasAuthority("CUSTOMER")
+                .antMatchers("/status", "/deliveryTime", "/office", "/type").hasAuthority("CUSTOMER")
                 .and()
                 .formLogin()
                 .loginPage("/login")
