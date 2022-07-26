@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table
 public class User implements UserDetails {
 
     @Id
@@ -110,3 +110,4 @@ public class User implements UserDetails {
         this.authorities = authorities;
     }
 }
+

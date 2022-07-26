@@ -47,6 +47,11 @@ public class Address {
         this.id = id;
     }
 
+
+    public String addressToString(){
+        return city + ", " + street + ", " + number + ", " + code;
+    }
+
     public long getId() {
         return id;
     }
@@ -117,5 +122,16 @@ public class Address {
 
     public void setCustomers(Set<Customer> customers) {
         this.customers = customers;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", number='" + number + '\'' +
+                ", code='" + code + '\'' +
+                '}';
     }
 }

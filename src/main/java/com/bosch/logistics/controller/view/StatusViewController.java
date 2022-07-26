@@ -17,14 +17,14 @@ public class StatusViewController {
     }
 
     @GetMapping
-    public String statusView(Model model){
+    public String statusView(Model model) {
         model.addAttribute("statuses", statusService.getStatuses());
         return "/status/status";
     }
 
     @GetMapping("/create-status")
     public String showCreateStatusForm(Model model) {
-        model.addAttribute("productStatus", new ProductStatus());
+        model.addAttribute("status", new ProductStatus());
         return "/status/create-status";
     }
 
@@ -35,23 +35,20 @@ public class StatusViewController {
     }
 
     @GetMapping("/edit/{id}")
-    public String showEditStatusForm(Model model, @PathVariable long id) {
-        model.addAttribute("productStatus", statusService.getStatus(id));
+    public String showEditStatus(Model model, @PathVariable long id) {
+        model.addAttribute("status", statusService.getStatus(id));
         return "/status/edit-status";
     }
 
     @PostMapping("/update/{id}")
-    public String updateStatusForm(@PathVariable long id, ProductStatus productStatus) {
-        statusService.update(productStatus, id);
+    public String updateStatus(Model model, @PathVariable long id, ProductStatus status) {
+        statusService.update(status, id);
         return "redirect:/status";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteStatus(@PathVariable long id) {
+    public String deleteStatus(@PathVariable int id) {
         statusService.delete(id);
-
         return "redirect:/status";
     }
-
-
 }
