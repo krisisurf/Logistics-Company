@@ -7,10 +7,11 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+@PrimaryKeyJoinColumn(name = "id")
+public class Customer extends User{
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private long id;
 
     @Column(nullable = false)
     private String firstName;
@@ -32,7 +33,7 @@ public class Customer {
     private Set<Product> productsReceive;
 
     public Customer(long id) {
-        this.id = id;
+        super(id);
     }
 
     public Customer() {
@@ -41,15 +42,6 @@ public class Customer {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Address address;
-
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -110,7 +102,7 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer{" +
-                "id=" + id +
+                "userId=" + super.getId() +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", tel='" + tel + '\'' +
