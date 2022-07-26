@@ -24,9 +24,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").authenticated()
-                .antMatchers("/api/address", "/api/customer", "/customer", "/product").hasAnyAuthority("ADMIN", "OFFICE_EMPLOYEE")
+                .antMatchers("/api/address", "/api/customer", "/customer", "/product").hasAnyAuthority("ADMIN", "OFFICE_EMPLOYEE", "DRIVER")
                 .antMatchers("/customer/create-customer", "/customer/create", "/customer/edit", "/customer/update", "/customer/delete",
-                        "/status/create-status", "/status/create", "/status/edit", "/status/update", "/status/delete").hasAnyAuthority("ADMIN")
+                        "/status/create-status", "/status/create", "/status/edit", "/status/update", "/status/delete").hasAnyAuthority("ADMIN", "DRIVER")
                 .antMatchers("/status", "/deliveryTime", "/office", "/type").hasAnyAuthority("CUSTOMER", "ADMIN", "OFFICE_EMPLOYEE")
                 .and()
                 .formLogin()
