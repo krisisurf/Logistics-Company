@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+
+<body>
+<header th:replace="fragments :: header"></header>
+
+<h4>Type of service edit:</h4>
+<div class="col-6">
+    <form action="#" th:action="@{/office/update/{id}(id=${office.id})}" th:object="${office}"
+          method="post">
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <select class="form-control" th:field="${office.address}" id="address">
+                <option value="">Select Address</option>
+                <option th:each="address : ${addresses}" th:value="${address.id}"
+                        th:text="${address.city} + ' ' + ${address.street} + ' ' + ${address.number}">
+                </option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Office</button>
+    </form>
+</div>
+</body>
+
+<footer th:replace="fragments :: footer"></footer>
+</html>
