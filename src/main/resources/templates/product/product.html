@@ -10,7 +10,7 @@
 <h4>Products list:</h4>
 
 <div class="col-12">
-    <a sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE')" class="btn btn-info"
+    <a sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE')" class="btn btn-success"
        th:href="@{/product/create-product}">Add</a>
 
     <h3 th:unless="${products} and ${products.size()}">There are no Products!</h3>
