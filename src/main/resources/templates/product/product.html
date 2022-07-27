@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.w3.org/1999/xhtml%22%3E">
 <head th:replace="fragments :: head">
 </head>
+
 <style>
     .hide {
       display: none;
@@ -17,6 +19,7 @@
       padding-left: 5px;
     }
 </style>
+
 <body>
 <header th:replace="fragments :: header"></header>
 
@@ -26,7 +29,7 @@
 
     <h3 th:unless="${products} and ${products.size()}">There are no Products!</h3>
     <table th:if="${products.size()>0}" class="table table-hover">
-        <th>Id</th>
+        <th sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE', 'DRIVER')">Id</th>
         <th>Name</th>
         <th>Registered Date</th>
         <th>Received Date</th>
