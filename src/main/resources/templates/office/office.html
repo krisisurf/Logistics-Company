@@ -17,7 +17,29 @@
         <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
         <tr th:each="office : ${offices}">
             <td sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE', 'DRIVER')" th:text="${office.id}"></td>
-            <td th:text="${office.address.city} + ' ' + ${office.address.street} + ' ' + ${office.address.number}"></td>
+            
+            <td>
+                <div class="divForeignKeys foreignKey" th:text="${office.address.addressToString()}"></div>
+                <div class="hide" sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE', 'DRIVER')">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Id</th>
+                            <th>City</th>
+                            <th>Street</th>
+                            <th>Number</th>
+                            <th>Code</th>
+                        </tr>
+                        <tr>
+                            <td th:text="${office.address.id}"></td>
+                            <td th:text="${office.address.city}"></td>
+                            <td th:text="${office.address.street}"></td>
+                            <td th:text="${office.address.number}"></td>
+                            <td th:text="${office.address.code}"></td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            
             <td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-info"
                    th:href="@{'/office/edit/'+${office.id}}">Edit</a></td>
             <td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-danger" th:href="@{'/office/delete/'+${office.id}}">Delete</a>
