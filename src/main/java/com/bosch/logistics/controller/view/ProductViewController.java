@@ -53,7 +53,7 @@ public class ProductViewController {
         return "/product/product";
     }
 
-    @GetMapping("/find-by-registeredDate/{registeredDate}")
+    @GetMapping("find-by-registeredDate/{registeredDate}")
     public String productByRegisteredDateView(Model model, @PathVariable String registeredDate) {
         Set<Product> products = productService.findAllByRegisteredDateOrderByNameAsc(LocalDate.parse(registeredDate));
         model.addAttribute("products", products);
