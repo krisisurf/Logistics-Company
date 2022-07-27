@@ -1,25 +1,26 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml%22%3E">
 <head th:replace="fragments :: head"></head>
 
 <body>
 <header th:replace="fragments :: header"></header>
 
-<h4>Histories list:</h4>
+<h4>Offices list:</h4>
 <div class="col-6">
-    <a class="btn btn-success" th:href="@{'/office/create-office/'}">Add</a>
+    <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-success" th:href="@{'/office/create-office/'}">Add</a>
     <h3 th:unless="${offices} and ${offices.size()}">There are no services!</h3>
     <table th:if="${offices.size()>0}" class="table table-hover">
-        <th>Id</th>
+        <th sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE', 'DRIVER')">Id</th>
         <th>Address</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <th sec:authorize="hasAuthority('ADMIN')">Edit</th>
+        <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
         <tr th:each="office : ${offices}">
-            <td th:text="${office.id}"></td>
+            <td sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE', 'DRIVER')" th:text="${office.id}"></td>
             <td th:text="${office.address.city} + ' ' + ${office.address.street} + ' ' + ${office.address.number}"></td>
-            <td><a class="btn btn-info"
+            <td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-info"
                    th:href="@{'/office/edit/'+${office.id}}">Edit</a></td>
-            <td><a class="btn btn-danger" th:href="@{'/office/delete/'+${office.id}}">Delete</a>
+            <td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-danger" th:href="@{'/office/delete/'+${office.id}}">Delete</a>
             </td>
         </tr>
     </table>
