@@ -59,6 +59,12 @@ public class ProductViewController {
         model.addAttribute("products", products);
         return "/product/product";
     }
+    @GetMapping("find-by-received-date-between/{startDate}/{endDate}")
+    public String productsReceivedBetweenDates(Model model, LocalDate startDate, LocalDate endDate){
+        Set<Product> products = productService.findAllByReceivedDateBetween(startDate,endDate);
+        model.addAttribute("products",products);
+        return "/product/product";
+    }
 
     private void addProductAttributes(Model model, Product product) {
         model.addAttribute("product", product);
