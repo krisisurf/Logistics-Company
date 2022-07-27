@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Set;
 
 @Entity
-@Table
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User implements UserDetails {
 
     @Id
@@ -37,6 +37,10 @@ public class User implements UserDetails {
     private Set<Role> authorities;
 
     public User() {
+    }
+
+    public User(long id) {
+        this.id = id;
     }
 
     public long getId() {

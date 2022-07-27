@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.w3.org/1999/xhtml%22%3E">
+
 <head th:replace="fragments :: head"></head>
 
 <body>
 <header th:replace="fragments :: header"></header>
 
-<h4>Status list:</h4>
-<td><a class="btn btn-success"
-       th:href="@{'/customer/create-customer'}">Add</a></td>
+<h4>Customers list:</h4>
 <div class="col-8">
+    <a sec:authorize="hasAnyAuthority('ADMIN','OFFICE_EMPLOYEE')" class="btn btn-success"
+       th:href="@{'/customer/create-customer'}">Add</a>
+
     <h3 th:unless="${customers} and ${customers.size()}">There are no customers!</h3>
     <table th:if="${customers.size()>0}" class="table table-hover">
         <th>Id</th>
@@ -16,19 +19,18 @@
         <th>Last Name</th>
         <th>Telephone number</th>
         <th>Address</th>
-        <th>Address</th>
-        <th>Products sent</th>
-        <th>Products received</th>
+        <th sec:authorize="hasAnyAuthority('ADMIN','OFFICE_EMPLOYEE')">Edit</th>
+        <th sec:authorize="hasAnyAuthority('ADMIN','OFFICE_EMPLOYEE')">Delete</th>
         <tr th:each="customer : ${customers}">
             <td th:text="${customer.id}"></td>
             <td th:text="${customer.firstName}"></td>
             <td th:text="${customer.lastName}"></td>
             <td th:text="${customer.tel}"></td>
             <td th:text="${customer.address.city}+ ' -> ' + ${customer.address.street}"></td>
-            <td th:text="${customer.productsSent}"></td>
-            <td><a class="btn btn-info"
-                   th:href="@{'/customer/edit/'+${customer.id}}">Edit</a></td>
-            <td><a class="btn btn-danger" th:href="@{'/customer/delete/'+${customer.id}}">Delete</a>
+            <td sec:authorize="hasAnyAuthority('ADMIN','OFFICE_EMPLOYEE')">
+                <a class="btn btn-info" th:href="@{'/customer/edit/'+${customer.id}}">Edit</a></td>
+            <td sec:authorize="hasAnyAuthority('ADMIN','OFFICE_EMPLOYEE')"><a class="btn btn-danger"
+                                                                              th:href="@{'/customer/delete/'+${customer.id}}">Delete</a>
             </td>
         </tr>
     </table>

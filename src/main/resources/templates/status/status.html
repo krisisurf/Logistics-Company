@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.w3.org/1999/xhtml%22%3E">
 <head th:replace="fragments :: head"></head>
 
 <body>
@@ -7,25 +8,25 @@
 
 
 <h4>Status list:</h4>
-<td><a class="btn btn-success"
+<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-success"
        th:href="@{'/status/create-status'}">Add</a></td>
 
 <div class="col-6">
     <h3 th:unless="${statuses} and ${statuses.size()}">There are no Product Statuses!</h3>
     <table th:if="${statuses.size()>0}" class="table table-hover">
-        <th>Id</th>
+        <th sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE', 'DRIVER')">Id</th>
         <th>Product Status</th>
 
-        <th>Edit</th>
-        <th>Delete</th>
+        <th sec:authorize="hasAuthority('ADMIN')">Edit</th>
+        <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
         <tr th:each="status : ${statuses}">
-            <td th:text="${status.id}"></td>
+            <td sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE', 'DRIVER')" th:text="${status.id}"></td>
             <td th:text="${status.status}"></td>
 
-            <td>
+            <td sec:authorize="hasAuthority('ADMIN')">
                 <a class="btn btn-info" th:href="@{'/status/edit/'+${status.id}}">Edit</a>
             </td>
-            <td>
+            <td sec:authorize="hasAuthority('ADMIN')">
                 <a class="btn btn-danger" th:href="@{'/status/delete/'+${status.id}}">Delete</a>
             </td>
         </tr>

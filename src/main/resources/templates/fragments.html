@@ -13,12 +13,12 @@ and open the template in the editor.
 
 <header th:fragment="header">
     <h1>Logistics Company</h1>
-<!--    <div class="col-3" sec:authorize="isAuthenticated()">-->
-<!--        Hello,-->
-<!--        <span sec:authentication="name"></span>-->
-<!--        <span sec:authentication="principal.authorities"></span>-->
-<!--        <a class="btn" th:href="@{/logout}">Logout</a>-->
-<!--    </div>-->
+    <div class="col-3" sec:authorize="isAuthenticated()">
+        Hello,
+        <span sec:authentication="name"></span>
+        <span sec:authentication="principal.authorities"></span>
+        <a class="btn" th:href="@{/logout}">Logout</a>
+    </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navigation">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -31,8 +31,11 @@ and open the template in the editor.
                 <li class="nav-item">
                     <a class="nav-link" href="/status">Product Statuses</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE', 'DRIVER')">
                     <a class="nav-link" href="/customer">Customers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/office">Offices</a>
                 </li>
             </ul>
         </div>

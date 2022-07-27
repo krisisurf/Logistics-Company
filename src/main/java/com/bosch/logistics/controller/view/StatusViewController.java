@@ -24,7 +24,7 @@ public class StatusViewController {
 
     @GetMapping("/create-status")
     public String showCreateStatusForm(Model model) {
-        model.addAttribute("status", new ProductStatus());
+        model.addAttribute("productStatus", new ProductStatus());
         return "/status/create-status";
     }
 
