@@ -2,7 +2,6 @@ package com.bosch.logistics.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -23,14 +22,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/").authenticated()
+                // TODO Users without a profile may visit ( /, /status, /deliveryTime, /office, /type )
+                .antMatchers("/", "/status", "/deliveryTime", "/office", "/type").authenticated()
                 .antMatchers("/api/**", "/customer").hasAnyAuthority("ADMIN", "OFFICE_EMPLOYEE", "DRIVER")
                 .antMatchers("/product").hasAnyAuthority("ADMIN", "OFFICE_EMPLOYEE", "DRIVER", "CUSTOMER")
-                .antMatchers("/customer/create-customer", "/customer/create", "/customer/edit", "/customer/update", "/customer/delete",
-                        "/status/create-status", "/status/create", "/status/edit", "/status/update", "/status/delete",
-                        "/office/create-office", "/office/create", "/office/edit", "/office/update", "/office/delete").hasAnyAuthority("ADMIN")
-                .antMatchers("/product/create-product", "/product/create", "/product/**", "/product/update", "/product/delete")
-                .hasAnyAuthority("ADMIN", "OFFICE_EMPLOYEE")
+                .antMatchers("/product/**").hasAnyAuthority("ADMIN", "OFFICE_EMPLOYEE")
+                .antMatchers("/status/**", "/office/**", "/type/**", "/customer/**").hasAnyAuthority("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/login")

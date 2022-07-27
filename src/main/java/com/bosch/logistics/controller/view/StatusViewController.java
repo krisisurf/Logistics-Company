@@ -36,7 +36,7 @@ public class StatusViewController {
 
     @GetMapping("/edit/{id}")
     public String showEditStatus(Model model, @PathVariable long id) {
-        model.addAttribute("status", statusService.getStatus(id));
+        model.addAttribute("productStatus", statusService.getStatus(id));
         return "/status/edit-status";
     }
 
