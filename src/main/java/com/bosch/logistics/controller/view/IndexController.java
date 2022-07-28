@@ -15,7 +15,7 @@ public class IndexController {
     public String getIndex(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        var username = authentication.getDetails();
+        var username = authentication.getAuthorities();
         model.addAttribute("username", username);
 
 
