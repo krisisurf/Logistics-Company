@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class LocalDateConverter implements Converter<String, LocalDate> {
 
     private static final List<String> SUPPORTED_FORMATS = Arrays.asList("dd-MM-yyyy", "yyyy-MM-dd", "MM-dd-yyyy");
