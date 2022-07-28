@@ -110,6 +110,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> findAllByRegisteredDateOrderBySenderAsc(LocalDate registeredDate) {
+        return productRepository.findAllByRegisteredDateOrderBySenderAsc(registeredDate);
+    }
+
+    @Override
     public Set<Product> findAllByReceivedDate(LocalDate date) {
         return productRepository.findAllByReceivedDate(date);
     }
