@@ -21,8 +21,6 @@ import java.util.Set;
 public class StatusViewController {
 
     private StatusService statusService;
-    private CustomerService customerService;
-    private ProductService productService;
 
     public StatusViewController(StatusService statusService) {
         this.statusService = statusService;
