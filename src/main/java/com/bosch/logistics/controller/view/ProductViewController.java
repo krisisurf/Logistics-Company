@@ -1,14 +1,21 @@
 package com.bosch.logistics.controller.view;
 
+import com.bosch.logistics.entity.Customer;
 import com.bosch.logistics.entity.Product;
+import com.bosch.logistics.entity.User;
 import com.bosch.logistics.service.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/product")
@@ -32,7 +39,16 @@ public class ProductViewController {
 
     @GetMapping
     public String productView(Model model) {
-        List<Product> products = productService.getProducts();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+
+        Customer customer = null;
+
+        if(user.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("CUSTOMER")))
+            customer = customerService.getCustomer(user.getId());
+
+        Set<Product> products = (customer == null) ? new HashSet<>(productService.getProducts()) : customer.getAllProducts();
+
         model.addAttribute("products", products);
         return "/product/product";
     }
