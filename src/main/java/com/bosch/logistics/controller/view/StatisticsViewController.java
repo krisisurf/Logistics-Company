@@ -24,10 +24,7 @@ public class StatisticsViewController {
         this.customerService = customerService;
     }
 
-    @GetMapping("/{id}")
-    public String showEditStatusForm(Model model, @PathVariable long id) {
-        return "/statistics";
-    }
+
 
     @GetMapping("/choose")
     public String createStatus(Model model, Customer customer) {
