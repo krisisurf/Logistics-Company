@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+
+<body>
+<header th:replace="fragments :: header"></header>
+
+<h4>Customers:</h4>
+<div class="col-6">
+    <form action="#" th:action="@{/statistics/choose}" method="get">
+        <div class="form-group">
+            <label for="customer">Customers:</label>
+            <select class="form-control" name="customer" id="customer" th:object="${customer}">
+                <option value="">Select Customer</option>
+                <option th:each="customerObj : ${customers}" th:value="${customerObj.getId()}"
+                        th:text="${customerObj.firstName} + ' ' + ${customerObj.lastName} + ' with id:' + ${customerObj.getId()}">
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Select Customer</button>
+    </form>
+</div>
+</body>
+
+<footer th:replace="fragments :: footer"></footer>
+</html>
