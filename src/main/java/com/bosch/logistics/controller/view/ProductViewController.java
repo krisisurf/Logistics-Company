@@ -44,7 +44,7 @@ public class ProductViewController {
 
         Customer customer = null;
 
-        if(user.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("CUSTOMER")))
+        if (user.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("CUSTOMER")))
             customer = customerService.getCustomer(user.getId());
 
         Set<Product> products = (customer == null) ? new HashSet<>(productService.getProducts()) : customer.getAllProducts();
@@ -53,28 +53,18 @@ public class ProductViewController {
         return "/product/product";
     }
 
-    @GetMapping("/byRegisteredDate/{date}")
-    public String byRegisteredDate(Model model,@PathVariable LocalDate date) {
-        List<Product> products = productService.findAllByRegisteredDateOrderBySenderAsc(date);
-        model.addAttribute("products", products);
-        return "/product/product";
-    }
-    
     @GetMapping("/find-by-registeredDate/{registeredDate}")
     public String productByRegisteredDateView(Model model, @PathVariable String registeredDate) {
         Set<Product> products = productService.findAllByRegisteredDateOrderByNameAsc(LocalDate.parse(registeredDate));
         model.addAttribute("products", products);
         return "/product/product";
     }
-    @GetMapping("/find-by-received-date-between")
-    public String productsReceivedBetweenDates(Model model, LocalDate startDate, LocalDate endDate){
+
+    @GetMapping("/find-by-received-date-between/{startDate}/{endDate}")
+    public String productsReceivedBetweenDates(Model model, @PathVariable LocalDate startDate, @PathVariable LocalDate endDate) {
         Set<Product> products = productService.findAllByReceivedDateBetween(startDate, endDate);
-        model.addAttribute("products",products);
+        model.addAttribute("products", products);
         return "/product/product";
-    }
-    @GetMapping("/product-between-dates")
-    public String productsBetweenDates(LocalDate startDate, LocalDate endDate){
-        return "/product/find-all-by-dates-between";
     }
 
     private void addProductAttributes(Model model, Product product) {
