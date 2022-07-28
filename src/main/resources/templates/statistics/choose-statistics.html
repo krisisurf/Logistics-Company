@@ -18,7 +18,7 @@
             </select>
 
             <label>Select a statistics:</label>
-            <select class="form-control" name="method" id="hlqb" th:object="${method}">
+            <select class="form-control" name="method" id="method" th:object="${method}">
                 <option value="">Select Customer</option>
                 <option th:each="method : ${methods}" th:value="${method}"
                         th:text="${method}">
