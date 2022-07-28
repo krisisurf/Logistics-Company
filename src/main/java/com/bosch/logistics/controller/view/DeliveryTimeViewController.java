@@ -18,6 +18,7 @@ public class DeliveryTimeViewController {
         this.deliveryTimeService = deliveryTimeService;
     }
 
+
     @GetMapping
     public String deliveryTimeView(Model model){
         model.addAttribute("deliveryTimes", deliveryTimeService.getDeliveryTime());

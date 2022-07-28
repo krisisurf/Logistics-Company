@@ -107,4 +107,8 @@ public class ProductController {
     public Set<Product> findAllByRegisteredDateOrderByNameAsc(@PathVariable String registeredDate) {
         return productService.findAllByRegisteredDateOrderByNameAsc(LocalDate.parse(registeredDate));
     }
+    @GetMapping("/sender-registeredDate/{registeredDate}")
+    public List<Product> findAllByRegisteredDateOrderBySenderAsc(LocalDate registeredDate) {
+        return productService.findAllByRegisteredDateOrderBySenderAsc(registeredDate);
+    }
 }

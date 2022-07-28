@@ -47,7 +47,7 @@ public interface ProductService {
 
     int countProductsByCustomersCity(String city);
 
-    List<Product> findAllByRegisteredDate(LocalDate date);
+    List<Product> findAllByRegisteredDateOrderBySenderAsc(LocalDate registeredDate);
 
 }
 
