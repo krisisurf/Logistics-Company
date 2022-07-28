@@ -17,7 +17,7 @@ and open the template in the editor.
     <div class="col-3" sec:authorize="isAuthenticated()">
         Hello,
         <span sec:authentication="name"></span>
-<!--        <span sec:authentication="principal.authorities"></span>-->
+        <!--        <span sec:authentication="principal.authorities"></span>-->
         <a class="btn" th:href="@{/logout}">Logout</a>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navigation">
@@ -30,6 +30,9 @@ and open the template in the editor.
                     <a class="nav-link" href="/product">Products</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/product/product-between-dates">Products in Dates Between</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/status">Product Statuses</a>
                 </li>
                 <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE', 'DRIVER')">
@@ -37,12 +40,6 @@ and open the template in the editor.
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/office">Offices</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/deliveryTime">Delivery Times</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/statistics">Statistics</a>
                 </li>
             </ul>
         </div>

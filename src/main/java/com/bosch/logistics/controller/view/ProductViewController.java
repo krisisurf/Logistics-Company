@@ -52,18 +52,22 @@ public class ProductViewController {
         model.addAttribute("products", products);
         return "/product/product";
     }
-    @GetMapping("/byRegisteredDate/{date}")
-    public String byRegisteredDate(Model model,@PathVariable LocalDate date) {
-        List<Product> products = productService.findAllByRegisteredDateOrderBySenderAsc(date);
-        model.addAttribute("products", products);
-        return "/product/product";
-    }
 
     @GetMapping("/find-by-registeredDate/{registeredDate}")
     public String productByRegisteredDateView(Model model, @PathVariable String registeredDate) {
         Set<Product> products = productService.findAllByRegisteredDateOrderByNameAsc(LocalDate.parse(registeredDate));
         model.addAttribute("products", products);
         return "/product/product";
+    }
+    @GetMapping("/find-by-received-date-between")
+    public String productsReceivedBetweenDates(Model model, LocalDate startDate, LocalDate endDate){
+        Set<Product> products = productService.findAllByReceivedDateBetween(startDate, endDate);
+        model.addAttribute("products",products);
+        return "/product/product";
+    }
+    @GetMapping("/product-between-dates")
+    public String productsBetweenDates(LocalDate startDate, LocalDate endDate){
+        return "/product/find-all-by-dates-between";
     }
 
     private void addProductAttributes(Model model, Product product) {

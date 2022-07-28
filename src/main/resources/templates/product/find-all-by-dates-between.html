@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+
+<div class="col-6">
+  <form action="#" th:action="@{/product/find-by-received-date-between}" method="get">
+    <div class="form-group">
+      <label for="startDate">First Date:</label>
+      <input class="form-control" type="date" id="startDate" name="startDate"/>
+      <label for="endDate">End Date:</label>
+      <input class="form-control" type="date" id="endDate" name="endDate"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>
