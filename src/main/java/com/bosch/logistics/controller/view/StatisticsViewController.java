@@ -20,16 +20,23 @@ import java.util.Set;
 public class StatisticsViewController {
     private CustomerService customerService;
 
+    Set<String> methods = new HashSet<String>();
     public StatisticsViewController(CustomerService customerService) {
         this.customerService = customerService;
+        methods.add("getTotalWeightAllProducts");
     }
 
 
 
-    @GetMapping("/choose")
-    public String createStatus(Model model, Customer customer) {
-        model.addAttribute("weight", customerService.getTotalWeightAllProducts(customer.getId()));
-        return "/statistics/statistics";
+    @GetMapping("/method")
+    public String createStatus(Model model, Customer customer, String method) {
+        if(method.equals("getTotalWeightAllProducts")) {
+            model.addAttribute("weight", customerService.getTotalWeightAllProducts(customer.getId()));
+            return "/statistics/totalweight-statistics";
+        }
+        else{
+            return "/notfound";
+        }
     }
 
     @GetMapping
@@ -49,6 +56,9 @@ public class StatisticsViewController {
         else{
             model.addAttribute("customers",customerService.getCustomers());
             model.addAttribute("customer", new Customer());
+
+            model.addAttribute("methods",methods);
+            model.addAttribute("method", new String());
             return "statistics/choose-statistics";
         }
     }
