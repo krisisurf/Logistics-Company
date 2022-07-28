@@ -46,5 +46,8 @@ public interface ProductService {
     Set<Product> productsByCustomersCity(String city);
 
     int countProductsByCustomersCity(String city);
+
+    List<Product> findAllByRegisteredDateOrderBySenderAsc(LocalDate registeredDate);
+
 }
 

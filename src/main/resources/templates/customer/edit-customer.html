@@ -19,7 +19,7 @@
       <select class="form-control" th:field="${customer.address}" id="address">
         <option value="">Select Address</option>
         <option th:each="address : ${addresses}" th:value="${address.id}"
-                th:text="${address.city}+ ' -> ' + ${address.street}">
+                th:text="${address.toString()}">
 
         </option>
       </select>
