@@ -1,5 +1,6 @@
 package com.bosch.logistics.controller.view;
 
+import com.bosch.logistics.service.OfficeService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class IndexController {
 
+    private OfficeService officeService;
+
+    public IndexController(OfficeService officeService) {
+        this.officeService = officeService;
+    }
+
     @GetMapping
     public String getIndex(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -21,6 +28,7 @@ public class IndexController {
 
         final String welcomeMessage = "WELCOME TO THE LOGISTICS COMPANY!";
         model.addAttribute("welcome", welcomeMessage);
+        model.addAttribute("offices", officeService.getOffices());
         return "index";
     }
 
