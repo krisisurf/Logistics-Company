@@ -1,34 +1,36 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml%22%3E">
 <head th:replace="fragments :: head"></head>
 
 <body>
 <header th:replace="fragments :: header"></header>
 
 <h4>Product Delivery Time list:</h4>
-<td><a class="btn btn-info"
-       th:href="@{/deliveryTime/create-deliveryTime}">Add</a></td>
+
 
 <div class="col-12">
+    <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-info"
+       th:href="@{/deliveryTime/create-deliveryTime}">Add</a>
     <h3 th:unless="${deliveryTimes} and ${deliveryTimes.size()}">There are no Product Delivery Time!</h3>
     <table th:if="${deliveryTimes.size()>0}" class="table table-hover">
-        <th>Id</th>
+        <th sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE', 'DRIVER')">Id</th>
         <th>Product Delivery Name</th>
         <th>DeliveryDays</th>
         <th>DeliveryHours</th>
         <th>Product Price</th>
-        <th>Product Is Available</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <th>Option Is Available</th>
+        <th sec:authorize="hasAuthority('ADMIN')">Edit</th>
+        <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
         <tr th:each="deliveryTime : ${deliveryTimes}">
-            <td th:text="${deliveryTime.id}"></td>
+            <td sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE', 'DRIVER')" th:text="${deliveryTime.id}"></td>
             <td th:text="${deliveryTime.name}"></td>
             <td th:text="${deliveryTime.deliveryDays}"></td>
             <td th:text="${deliveryTime.deliveryHours}"></td>
             <td th:text="${deliveryTime.price}"></td>
             <td th:text="${deliveryTime.isAvailable}"></td>
-            <td><a class="btn btn-info" th:href="@{'/deliveryTime/edit/'+${deliveryTime.id}}">Edit</a></td>
-            <td><a class="btn btn-danger" th:href="@{'/deliveryTime/delete/'+${deliveryTime.id}}">Delete</a></td>
+            <td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-info" th:href="@{'/deliveryTime/edit/'+${deliveryTime.id}}">Edit</a></td>
+            <td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-danger" th:href="@{'/deliveryTime/delete/'+${deliveryTime.id}}">Delete</a></td>
         </tr>
     </table>
 </div>
