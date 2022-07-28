@@ -1,32 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: head">
-</head>
-<style>
-    .hide {
-      display: none;
-    }
-    .divForeignKeys:hover + .hide {
-      display: block;
-      color: red;
-    }
-    .foreignKey{
-      border: 1px;
-      border-radius: 5px;
-      background-color: #f2f2f2;
-      padding-left: 5px;
-    }
-</style>
+<html xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.w3.org/1999/xhtml%22%3E">
+
+<head th:replace="fragments :: head"></head>
+
 <body>
 <header th:replace="fragments :: header"></header>
 
 <h4>Products list:</h4>
-<td><a class="btn btn-info"
-       th:href="@{/product/create-product}">Add</a></td>
+
+<div class="col-12">
+    <a sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE')" class="btn btn-success"
+       th:href="@{/product/create-product}">Add</a>
 
     <h3 th:unless="${products} and ${products.size()}">There are no Products!</h3>
     <table th:if="${products.size()>0}" class="table table-hover">
-        <th>Id</th>
+        <th sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE', 'DRIVER')">Id</th>
         <th>Name</th>
         <th>Registered Date</th>
         <th>Received Date</th>
@@ -39,18 +28,18 @@
         <th>Receiver Address</th>
         <th>Delivery Time</th>
 
-        <th>Edit</th>
-        <th>Delete</th>
+        <th sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE')">Edit</th>
+        <th sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE')">Delete</th>
 
         <tr th:each="product : ${products}" th:id="'productRow_'+${product.id}">
-            <td th:text="${product.id}"></td>
+            <td th:text="${product.id}" sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE', 'DRIVER')"></td>
             <td th:text="${product.name}"></td>
             <td th:text="${product.registeredDate}"></td>
             <td th:text="${product.receivedDate == null} ? 'NOT RECEIVED' : ${product.receivedDate}"></td>
             <td th:text="${product.weight}"></td>
             <td>
                 <div class="divForeignKeys foreignKey" th:text="${product.productType.typeName}"></div>
-                <div class="hide">
+                <div class="hide" sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE', 'DRIVER')">
                     <table class="table table-hover">
                         <tr>
                             <th>Id</th>
@@ -58,9 +47,9 @@
                             <th>Price</th>
                         </tr>
                         <tr>
-                        <td th:text="${product.productType.id}"></td>
-                        <td th:text="${product.productType.typeName}"></td>
-                        <td th:text="${product.productType.price}"></td>
+                            <td th:text="${product.productType.id}"></td>
+                            <td th:text="${product.productType.typeName}"></td>
+                            <td th:text="${product.productType.price}"></td>
                         </tr>
                     </table>
                 </div>
@@ -68,7 +57,7 @@
 
             <td>
                 <div class="divForeignKeys foreignKey" th:text="${product.productStatus.status}"></div>
-                <div class="hide">
+                <div class="hide" sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE', 'DRIVER')">
                     <table class="table table-hover">
                         <tr>
                             <th>Id</th>
@@ -84,7 +73,7 @@
 
             <td>
                 <div class="divForeignKeys foreignKey" th:text="${product.sender.getAbbreviatedFullName()}"></div>
-                <div class="hide">
+                <div class="hide" sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE', 'DRIVER')">
                     <table class="table table-hover">
                         <tr>
                             <th>Id</th>
@@ -106,7 +95,7 @@
 
             <td>
                 <div class="divForeignKeys foreignKey" th:text="${product.receiver.getAbbreviatedFullName()}"></div>
-                <div class="hide">
+                <div class="hide" sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE', 'DRIVER')">
                     <table class="table table-hover">
                         <tr>
                             <th>Id</th>
@@ -128,7 +117,7 @@
 
             <td>
                 <div class="divForeignKeys foreignKey" th:text="${product.senderAddress.addressToString()}"></div>
-                <div class="hide">
+                <div class="hide" sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE', 'DRIVER')">
                     <table class="table table-hover">
                         <tr>
                             <th>Id</th>
@@ -150,7 +139,7 @@
 
             <td>
                 <div class="divForeignKeys foreignKey" th:text="${product.receiverAddress.addressToString()}"></div>
-                <div class="hide">
+                <div class="hide" sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE', 'DRIVER')">
                     <table class="table table-hover">
                         <tr>
                             <th>Id</th>
@@ -172,7 +161,7 @@
 
             <td>
                 <div class="divForeignKeys foreignKey" th:text="${product.deliveryTime.name}"></div>
-                <div class="hide">
+                <div class="hide" sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE', 'DRIVER')">
                     <table class="table table-hover">
                         <tr>
                             <th>Id</th>
@@ -186,12 +175,16 @@
                 </div>
             </td>
 
-            <td><a class="btn btn-info"
-                   th:href="@{'/product/edit/'+${product.id}}">Edit</a></td>
-            <td><a class="btn btn-danger" th:href="@{'/product/delete/'+${product.id}}">Delete</a>
+            <td sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE')">
+                <a class="btn btn-info" th:href="@{'/product/edit/'+${product.id}}">Edit</a>
+            </td>
+
+            <td sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE')">
+                <a class="btn btn-danger" th:href="@{'/product/delete/'+${product.id}}">Delete</a>
             </td>
         </tr>
     </table>
+</div>
 </body>
 
 <footer th:replace="fragments :: footer"></footer>

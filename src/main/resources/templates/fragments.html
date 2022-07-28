@@ -9,6 +9,7 @@ and open the template in the editor.
     <title>Logistics Company</title>
     <meta charset="UTF-8">
     <link href="/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="\css\hoverable.css" type="text/css">
 </head>
 
 <header th:fragment="header">
@@ -16,7 +17,7 @@ and open the template in the editor.
     <div class="col-3" sec:authorize="isAuthenticated()">
         Hello,
         <span sec:authentication="name"></span>
-        <span sec:authentication="principal.authorities"></span>
+<!--        <span sec:authentication="principal.authorities"></span>-->
         <a class="btn" th:href="@{/logout}">Logout</a>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navigation">

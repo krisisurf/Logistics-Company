@@ -26,7 +26,28 @@
             <td th:text="${customer.firstName}"></td>
             <td th:text="${customer.lastName}"></td>
             <td th:text="${customer.tel}"></td>
-            <td th:text="${customer.address.city}+ ' -> ' + ${customer.address.street}"></td>
+            <td>
+                <div class="divForeignKeys foreignKey" th:text="${customer.address.addressToString()}"></div>
+                <div class="hide" sec:authorize="hasAnyAuthority('ADMIN', 'OFFICE_EMPLOYEE', 'DRIVER')">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Id</th>
+                            <th>City</th>
+                            <th>Street</th>
+                            <th>Number</th>
+                            <th>Code</th>
+                        </tr>
+                        <tr>
+                            <td th:text="${customer.address.id}"></td>
+                            <td th:text="${customer.address.city}"></td>
+                            <td th:text="${customer.address.street}"></td>
+                            <td th:text="${customer.address.number}"></td>
+                            <td th:text="${customer.address.code}"></td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            
             <td sec:authorize="hasAnyAuthority('ADMIN','OFFICE_EMPLOYEE')">
                 <a class="btn btn-info" th:href="@{'/customer/edit/'+${customer.id}}">Edit</a></td>
             <td sec:authorize="hasAnyAuthority('ADMIN','OFFICE_EMPLOYEE')"><a class="btn btn-danger"
