@@ -16,7 +16,7 @@
     <div class="m-4">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a href="https://imgbb.com/" class="navbar-brand">
+                <a href="" class="navbar-brand">
                     <img src="https://i.ibb.co/Pwdt0vT/logistics-logo-design-inspiration-vector-24397807-removebg-preview.png" alt="Logistics Company"  height="60" border="0">
                 </a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -36,6 +36,11 @@
         </nav>
     </div>
 </header>
+<div class="col-3" sec:authorize="isAuthenticated()">
+    Hello,
+    <span sec:authentication="name"></span>
+    <!--        <span sec:authentication="principal.authorities"></span>-->
+</div>
 <!--<h5 th:text="${username}"></h5>-->
 <h4 style="margin: 20px;">Offices list:</h4>
 <div class="col-6">
