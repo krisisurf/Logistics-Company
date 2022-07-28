@@ -44,7 +44,7 @@ public class StatisticsViewController {
 
             model.addAttribute("weight", customerService.getTotalWeightAllProducts(customer.getId()));
 
-            return "/statistics";
+            return "/statistics/statistics";
         }
         else{
             model.addAttribute("customers",customerService.getCustomers());
