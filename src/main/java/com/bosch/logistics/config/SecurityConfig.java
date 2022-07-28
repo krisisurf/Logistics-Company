@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api", "/customer", "/product").hasAnyAuthority("ADMIN", "OFFICE_EMPLOYEE", "DRIVER")
                 .antMatchers("/customer/create-customer", "/customer/create", "/customer/edit", "/customer/update", "/customer/delete",
                         "/status/create-status", "/status/create", "/status/edit", "/status/update", "/status/delete",
-                        "/office/create-status", "/office/create", "/office/edit", "/office/update", "/office/delete").hasAnyAuthority("ADMIN")
+                        "/office/create-status", "/office/create", "/office/edit", "/office/update", "/office/delete", "/deliveryTime/**").hasAnyAuthority("ADMIN")
                 // Users without a profile may visit those pages
                 //.antMatchers("/status", "/deliveryTime", "/office", "/type").hasAnyAuthority("CUSTOMER", "ADMIN", "OFFICE_EMPLOYEE")
                 .and()
