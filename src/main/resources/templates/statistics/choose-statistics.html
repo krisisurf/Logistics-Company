@@ -5,15 +5,23 @@
 <body>
 <header th:replace="fragments :: header"></header>
 
-<h4>Customers:</h4>
+<h4>Statistics</h4>
 <div class="col-6">
-    <form action="#" th:action="@{/statistics/choose}" method="get">
+    <form action="#" th:action="@{/statistics/method}" method="get">
         <div class="form-group">
-            <label for="customer">Customers:</label>
+
+            <label>Select a customer:</label>
             <select class="form-control" name="customer" id="customer" th:object="${customer}">
                 <option value="">Select Customer</option>
                 <option th:each="customerObj : ${customers}" th:value="${customerObj.getId()}"
                         th:text="${customerObj.firstName} + ' ' + ${customerObj.lastName} + ' with id:' + ${customerObj.getId()}">
+            </select>
+
+            <label>Select a statistics:</label>
+            <select class="form-control" name="method" id="method" th:object="${method}">
+                <option value="">Select Customer</option>
+                <option th:each="method : ${methods}" th:value="${method}"
+                        th:text="${method}">
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Select Customer</button>
