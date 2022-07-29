@@ -17,7 +17,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a href="" class="navbar-brand">
-                    <img src="https://i.ibb.co/Pwdt0vT/logistics-logo-design-inspiration-vector-24397807-removebg-preview.png" alt="Logistics Company"  height="60" border="0">
+                    <img th:src="@{resources/images/logo.png}" alt="Logistics Company" >
                 </a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
@@ -29,6 +29,8 @@
                         <a href="/status" class="nav-item nav-link">Product Statuses</a>
                         <a href="/customer" class="nav-item nav-link">Customers</a>
                         <a href="/office" class="nav-item nav-link">Offices</a>
+                        <a href="/deliveryTime" class="nav-link">Delivery Times</a>
+                        <a href="/statistics" class="nav-link">Statistics</a>
                         <a class="nav-item nav-link disabled" tabindex="-1" th:href="@{/logout}">Logout</a>
                     </div>
                 </div>
@@ -40,6 +42,7 @@
     Hello,
     <span sec:authentication="name"></span>
     <!--        <span sec:authentication="principal.authorities"></span>-->
+    <a class="btn" th:href="@{/logout}">Logout</a>
 </div>
 <!--<h5 th:text="${username}"></h5>-->
 <h4 style="margin: 20px;">Offices list:</h4>
